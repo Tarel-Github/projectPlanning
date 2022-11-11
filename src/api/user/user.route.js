@@ -21,4 +21,7 @@ router.post('/login', userController.login);                //로그인 하기
 //그러나 여기 코드는 MySQL에 맞춰져 있다.
 //변환이 필요하다.
 
+//유저는 회원가입, 로그인, 이메일 중복체크
+
+
 module.exports = router;

@@ -4,9 +4,13 @@ const router = express.Router();
 const TodoController = require('./todo.controller');
 const todoController = new TodoController;
 
-router.get('/', todoController.getTodo);
+router.get('/get', todoController.getTodo);
+router.post('/post', todoController.postTodo);
+router.put('/put', todoController.putTodo);
+router.delete('/delete', todoController.deleteTodo);
 
 module.exports = router;
 
 
-//구현 기능: 프로젝트 생성, 프로젝트 열람, 프로젝트 편집, 프로젝트 삭제
+//프로젝트의 하위 기능
+//구현 기능: 투두 생성, 투두 수정, 투두 삭제

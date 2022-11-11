@@ -4,11 +4,14 @@ const router = express.Router();
 const PlanController = require('./plan.controller');
 const planController = new PlanController;
 
-router.get('/', planController.getPlan());
-
+router.get('/get', planController.getPlan());
+router.post('/post', planController.postPlan());
+router.put('/put', planController.putPlan());
+router.delete('/delete', planController.deletePlan());
 
 
 module.exports = router;
 
 
-//구현 기능: 포스트 전체보기, 포스트 상세보기, 포스트 작성하기, 포스트 수정하기, 포스트 삭제하기
+//프로젝트의 하위 기능으로 글로써 작성한다.
+//구현 기능: 글작성, 글수정, 글삭제
