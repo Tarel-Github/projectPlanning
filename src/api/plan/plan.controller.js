@@ -6,6 +6,8 @@ class PlanController {
     getPlan = async (req, res, next) =>{
         try{
             //const {userId}= res.locals.user;
+
+            
         }catch(err){
 
         }

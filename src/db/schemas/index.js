@@ -11,8 +11,8 @@ const connect = () => {                     //DB에 접속
 
 // 몽구스 Connection에 이벤트 리스너를 삽입
 // 에러 발생 시 에러 내용을 기록
-mongoose.connection.on("error", (err) => {
-  console.error("Mongo DB Connect Error", err);
+mongoose.connection.on("error", (err) => {  //DB에 접속을 실패할 경우
+  console.error("Mongo DB 연결 실패!!", err);
 });
 
 module.exports = connect;
