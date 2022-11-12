@@ -4,7 +4,8 @@ const router = express.Router();
 const ProjectController = require('./project.controller');
 const projectController = new ProjectController;
 
-router.get('/get', projectController.getProject);
+router.get('/get', projectController.getProjectAll);
+router.get('/get/:projectId', projectController.getProjectDetail);
 router.post('/post', projectController.postProject);
 router.put('/put', projectController.putProject);
 router.delete('/delete', projectController.deleteProject);

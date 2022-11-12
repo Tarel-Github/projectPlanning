@@ -4,7 +4,7 @@ const uri = process.env.MONGODB;            //환경변수에서 접속할 Mongo
 
 const connect = () => {                     //DB에 접속
   mongoose.connect(uri, (error) => {
-    if (error) console.log("Mongo DB Connect Error");
+    if (error) console.log("Mongo DB 연결 실패!!");
     else console.log("MongoDB 연결 성공");
   });
 };
