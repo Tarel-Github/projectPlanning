@@ -20,7 +20,7 @@ app.use(express.static("static"))                   //html 파일을 불러오�
 
 app.use('/', router); // 라우터 등록
 
-app.listen(process.env.PORT, () => {
-  console.log(process.env.PORT + "번 서버를 가동합니다");
-  console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━요청 대기중━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+app.listen(process.env.PORT, () => { 
+  console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━서버 가동 시작━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+  console.log(process.env.PORT + "번 서버를 가동합니다.");
 });
