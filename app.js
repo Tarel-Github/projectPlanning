@@ -13,7 +13,8 @@ connect();    //위에 선언한 connect를 사용
 app.use(express.json());                          //json 파일을 서버 정보 주고 받는 것에 사용한다.
 app.use(express.urlencoded({extended:false}));
 app.use(cors());                                    //cors 사용
-app.use(express.static("static"))                   //html 파일을 불러오겠다는 뜻이다.
+//app.use(express.static("static"))                   //html 파일을 불러오겠다는 뜻이다.
+app.use(express.static("front/html"))                   //html 파일을 불러오겠다는 뜻이다.
 
 // app.use(errorLogger); // Error Logger
 // app.use(errorHandler); // Error Handler
