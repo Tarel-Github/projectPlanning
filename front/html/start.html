@@ -9,9 +9,7 @@
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script><!--이게 있어야 에이젝스 코드를 쓸 수 있음!!-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script><!--이게 있어야 에이젝스 코드를 쓸 수 있음!!-->
         
-
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-
 
             <!-- 제이커리나 부트스트렙 등을 쓰려면 이게 필요하다고 함 -->
         <script
@@ -36,43 +34,72 @@
 
         </script>
         <style>
+            body {
+                background-image: linear-gradient(rgb(89,208,255), rgb(255, 255, 255));
+                color: aqua;
+            }
+            .info{
+                background-color: rgb(0, 225, 200);
+                color : white;
+                font-size: 50px;
+                width: 1000px;
+                margin: auto;
+                margin-top: 10%;
+                margin-bottom: 1%;
+                text-align: center;
+                padding: 40px;
+            }
+            .inputBox{
+                width: 1000px; margin: auto; margin-bottom: 20%;
+                
+            }
         </style>
     </head>
 
     <body>
-   
-    <section class="hero is-primary">
-        <div class="hero-body">
-          <p class="title">
-            Tarel_Base에 오신걸 환영합니다.
-          </p>
-          <p class="subtitle">
-            먼저 로그인하시기 바랍니다.
-          </p>
+        <div>
+            　
         </div>
-    </section>
+    
 
-    <div style="width: 100%; height: 60px; padding: 10px">
-        <button class="button" value="page move" onclick="window.location.href='/post.html'" style="float: right;">글쓰기</button> <!--글쓰기 사용시 이동하는 코드-->
-    </div>
-
-    <div style="width: 1000px; margin: auto; margin-top: 1%;">
-
-        <div class="box">
-            <table id="post-box">
-                <tr>
-                    <th style="width: 750px;">제목</th>
-                    <th style="width: 200px;">작성자</th>
-                    <th style="width: 200px;">날짜</th>
-                    
-                </tr>
-
-            </table>
-          </div>
-
+    <div class="info">
+        Tarel_Base에 오신걸 환영합니다.<br>
+        <div style="font-size:24px; margin-top: 2%;">
+            이곳은 개발 계획서를 작성하기 위한 사이트입니다.
+        </div>
+        
     </div>
 
 
+
+    <div class="inputBox">
+        <div style="width: 50%; margin: auto;">
+            <form class="box">
+                <div class="field">
+                <label class="label">Email</label>
+                <div class="control">
+                    <input class="input" type="email" placeholder="myemail@example.com">
+                </div>
+                </div>
+            
+                <div class="field">
+                <label class="label">Password</label>
+                <div class="control">
+                    <input class="input" type="password" placeholder="********">
+                </div>
+                </div>
+            
+                <button class="button is-primary">로그인</button>
+                <button class="button is-primary">회원가입</button>
+            </form>
+        </div>
+
+    </div>
+
+
+    <div>
+        　
+    </div>
 
 
 
