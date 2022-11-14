@@ -4,6 +4,11 @@ const missonSchema = new mongoose.Schema({
     projectId: {
         type: Number,
         required: true,
+        unique: true
+    },
+    userId:{
+        type: Number,
+        required: true,
     },
     title: {
         type: String,
@@ -12,10 +17,12 @@ const missonSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         required: true,
+        default: Date.now(),
     },
     updatedAt: {
         type: Date,
         required: true,
+        default: Date.now(),
     },
 },
     {

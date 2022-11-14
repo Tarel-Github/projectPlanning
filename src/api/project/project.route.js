@@ -4,6 +4,7 @@ const router = express.Router();
 const ProjectController = require('./project.controller');
 const projectController = new ProjectController;
 
+//경로(/project)
 router.get('/get', projectController.getProjectAll);
 router.get('/get/:projectId', projectController.getProjectDetail);
 router.post('/post', projectController.postProject);
