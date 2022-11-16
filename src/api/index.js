@@ -14,7 +14,8 @@ router.use("/project", project);
 
 //여기에 경로별 사용할 html을 작성
 router.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../front/html/start.html"));
+  console.log("로그인 페이지를 출력합니다");
+  res.sendFile(path.join(__dirname, "../../front/html/login.html"));
 });
 
 module.exports = router;

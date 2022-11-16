@@ -23,8 +23,4 @@ router.post("/login", userController.login); //로그인 하기
 
 //유저는 회원가입, 로그인, 이메일 중복체크
 
-router.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "./front/html/start.html"));
-});
-
 module.exports = router;

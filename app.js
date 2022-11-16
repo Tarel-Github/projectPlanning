@@ -22,10 +22,6 @@ app.use(express.static("front/html")); //html 파일을 불러오겠다는 뜻�
 
 app.use("/", router); // 라우터 등록, 라우터에 경로별 HTML을 정의해 둔다.
 
-router.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "./front/html/start.html"));
-});
-
 app.listen(process.env.PORT, () => {
   console.log(
     "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━서버 가동 시작━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
