@@ -17,10 +17,7 @@ router.post("/signup", userController.signUp); //회원가입 하기
 router.post("/signup/emailDup", userController.emailDup); //이메일 중복 체크
 router.post("/login", userController.login); //로그인 하기
 
-//데이터 베이스는 몽고DB를 사용한다.
-//그러나 여기 코드는 MySQL에 맞춰져 있다.
-//변환이 필요하다.
-
-//유저는 회원가입, 로그인, 이메일 중복체크
+//앞으로 추가해야할 기능들
+//카카오 로그인
 
 module.exports = router;
