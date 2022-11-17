@@ -22,6 +22,11 @@ class UserRepository {
     return message;
   };
 
+  //로그인시 들어온 요청에 따라 계정정보 가져옴
+  findIdentifier = async (identifier) => {
+    return await User.find({ identifier: identifier });
+  };
+
   //유저 이메일 파일을 가져옴
   userFindEmail = async (email) => {
     return await Users.findOne({ where: { email } });

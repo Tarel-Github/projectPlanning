@@ -1,4 +1,5 @@
 const UserRepository = require("./user.repository"); //리포지토리의 내용을 가져와야한다.
+
 const bcrypt = require("bcrypt"); //비번 암호화 모듈
 const jwt = require("jsonwebtoken"); //토큰 발급 모듈
 require("dotenv").config();
@@ -6,33 +7,35 @@ require("dotenv").config();
 class UserService {
   userRepository = new UserRepository();
 
+  //회원가입
   signUp = async (identifier, password, nickname) => {
-    //리포지토리에 전달
     return await this.userRepository.signup(identifier, password, nickname);
   };
 
-  login = async (email, password) => {
-    //리포지토리에서 입력받은 이메일이 있는지 찾아본다.
-    const loginUser = this.userRepository.userFindEmail(email);
+  //유저 검증
+  verifyUser = async (identifier, password) => {
+    const user = await this.userRepository.findIdentifier(identifier);
+    if (!user) throw new Error("가입되지 않은 아이디입니다."); //이부분 다시 확인해 볼것
 
-    //리포지토리에서 입력받은 이메일 데이터가 없거나 있더라도 비번이 다르다면
-    if (
-      !loginUser ||
-      !(await bcrypt.compare(password, loginUser.get().password))
-    )
-      //입력받은 password와 리포서 가져온 비번을 비교
-      throw new Error("아이디 혹은 비밀번호가 일치하지 않습니다"); //다르다면 에러를 던짐
+    const passwordVerify = await bcrypt.compare(password, user[0].password);
 
-    //토큰 발급하여 반환하기
-    return jwt.sign(
-      {
-        userId: loginUser.userId,
-        nickname: loginUser.nickname,
-        createdAt: loginUser.createdAt,
-      },
-      process.env.JWT_SECRET_KEY,
-      { expiresIn: "1h" } //토큰의 지속시간은 한시간
+    if (!passwordVerify) throw new ErrorCustom("비밀번호 오류");
+
+    //액세스 토큰 발급
+    const accessToken = jwt.sign(
+      { userId: user.userId, userKey: user.userKey },
+      process.env.SECRET_KEY
+      // {
+      //   expiresIn: "100s",
+      // }
     );
+    //리프레시 토큰 발급, 지속시간 따로 설정할 것
+    const refreshToken = jwt.sign({}, process.env.SECRET_KEY, {
+      expiresIn: "1h",
+    });
+
+    //발급된 토큰을 반환
+    return { accessToken, refreshToken };
   };
 
   dupCheckEmail = async (email) => {

@@ -27,24 +27,36 @@ class UserController {
 
       await this.userService.signUp(identifier, hashed, nickname);
 
-      res.status(201).json({ ok: true, message: "회원가입 성공" });
+      return res.status(201).json({ message: "회원가입 성공" });
     } catch (err) {
-      res.status(500).json({ ok: false, message: err.message });
+      return res.status(500).json({ message: "회원가입 실패", error: err });
       //next(err)
     }
   };
 
   //로그인
   login = async (req, res, next) => {
-    //입력받은 정보들을 검증하는 파일에 넣어서 검증한다.
-    const { email, password } = await loginSchema.validateAsync(req.body);
+    try {
+      const { identifier, password } = req.body;
+      //const { email, password } = await loginSchema.validateAsync(req.body);
 
-    //받아온 파일들을 서비스로 넘긴다.
-    const loginUser = await this.userService.login(email, password);
+      //받아온 파일들로 유저 검증을 하고, 통과하면 토큰을 발급한다.
+      const { accessToken, refreshToken } = await this.userService.verifyUser(
+        identifier,
+        password
+      );
 
-    res.header("Authorization", loginUser);
-    res.cookie("Authorization", loginUser, { Expires: 3600 });
-    res.send({ token: loginUser });
+      //레디스에 리프레시 토큰을 넘기는 명령은 보류//await redisCli.set(userId, refreshToken);
+
+      res.cookie("accesstoken", accessToken);
+      res.cookie("refreshtoken", refreshToken);
+
+      return res
+        .status(200)
+        .json({ accessToken, refreshToken, message: "로그인" });
+    } catch (err) {
+      return res.status(500).json({ message: "로그인 실패", error: err });
+    }
   };
 
   //이메일 중복 확인
