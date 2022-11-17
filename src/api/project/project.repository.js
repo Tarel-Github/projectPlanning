@@ -41,10 +41,7 @@ class ProjectRepository {
 
   //기존 프로젝트 삭제하기
   deleteProject = async (projectId) => {
-    console.log("리포시작");
-    console.log(projectId);
     const deleteProject = await Project.remove(projectId);
-    console.log("리포끝");
     return deleteProject;
   };
 }

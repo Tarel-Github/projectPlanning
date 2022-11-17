@@ -3,7 +3,7 @@ const ProjectService = require("./project.service");
 class ProjectController {
   projectService = new ProjectService();
 
-  //특정 유저의 모든 프로젝트 가져오기(/project/get)
+  //특정 유저의 모든 투두 가져오기(/project/get)
   getProjectAll = async (req, res, next) => {
     try {
       //const {userId}= res.locals.user;
@@ -17,7 +17,7 @@ class ProjectController {
     }
   };
 
-  //해당 프로젝트 자세히 보기(/project/get/:projectId)
+  //해당 투두 자세히 보기(/project/get/:projectId)
   getProjectDetail = async (req, res, next) => {
     try {
       //const {userId}= res.locals.user;
@@ -36,7 +36,7 @@ class ProjectController {
     }
   };
 
-  //새로운 프로젝트 작성하기(/project/post)
+  //새로운 투두 작성하기(/project/post)//완성
   postProject = async (req, res, next) => {
     try {
       //const {userId}= res.locals.user;
@@ -49,7 +49,7 @@ class ProjectController {
     }
   };
 
-  //기존 프로젝트 수정하기(/project/put)
+  //기존 투두 수정하기(/project/put)
   putProject = async (req, res, next) => {
     try {
       //const {userId}= res.locals.user;
@@ -63,7 +63,7 @@ class ProjectController {
     }
   };
 
-  //기존 프로젝트 삭제하기(/project/delete)
+  //기존 투두 삭제하기(/project/delete)//완성
   deleteProject = async (req, res, next) => {
     try {
       //const {userId}= res.locals.user;
