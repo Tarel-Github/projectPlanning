@@ -4,18 +4,9 @@ class TodoService {
   todoRepository = new TodoRepository();
 
   //특정 유저의 모든 투두 가져오기
-  getProjectAll = async (userId) => {
-    const getProject = await this.todoRepository.getProjectAll(userId);
-    return getProject;
-  };
-
-  //해당 투두 자세히 보기
-  getProjectDetail = async (userId, projectId) => {
-    const getProject = await this.todoRepository.getProjectDetail(
-      userId,
-      projectId
-    );
-    return getProject;
+  getTodo = async (projectId) => {
+    const getTodo = await this.todoRepository.getTodo(projectId);
+    return getTodo;
   };
 
   //새로온 투두 작성하기//완성
@@ -25,9 +16,15 @@ class TodoService {
   };
 
   //기존 투두 수정하기
-  putTodo = async (userId) => {
-    const putTodo = await this.todoRepository.putTodo(userId, projectId);
+  putTodo = async (todoId, title) => {
+    const putTodo = await this.todoRepository.putTodo(todoId, title);
     return putTodo;
+  };
+
+  //기존 체크 수정하기
+  checkTodo = async (todoId, check) => {
+    const checkTodo = await this.todoRepository.checkTodo(todoId, check);
+    return checkTodo;
   };
 
   //기존 투두 삭제하기

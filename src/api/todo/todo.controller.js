@@ -3,13 +3,14 @@ const TodoService = require("./todo.service");
 class TodoController {
   todoService = new TodoService();
 
+  //해당 프로젝트의 모든 투두 가져오기 // 완료
   getTodo = async (req, res, next) => {
     try {
       //const {userId}= res.locals.user;
       const userId = 1;
       const { projectId } = req.params;
-      const getTodo = await this.todoService.getProjectDetail();
-      return res.status(200).json({ message: "todo리스트", data: getProject });
+      const getTodo = await this.todoService.getTodo(projectId);
+      return res.status(200).json({ message: "todo리스트", data: getTodo });
     } catch (err) {
       return res.status(500).json({ message: "getTodo 실패", error: err });
     }
@@ -31,21 +32,39 @@ class TodoController {
     }
   };
 
-  //todo 수정
+  //todo 수정 //완성
   putTodo = async (req, res, next) => {
     try {
       //const {userId}= res.locals.user;
       const userId = 1;
+      const todoId = req.params;
+      const { title } = req.body;
+      const putTodo = await this.todoService.putTodo(todoId, title);
+
+      if (putTodo.matchedCount === 0) {
+        return res.status(400).json({ message: "대상없음", data: putTodo });
+      }
+
+      return res.status(200).json({ message: "putTodo 성공", data: putTodo });
     } catch (err) {
       return res.status(500).json({ message: "putTodo 실패", error: err });
     }
   };
 
-  //todo 체크
+  //todo 체크 //완성
   checkTodo = async (req, res, next) => {
     try {
       //const {userId}= res.locals.user;
       const userId = 1;
+      const todoId = req.params;
+      const { check } = req.body;
+      const checkTodo = await this.todoService.checkTodo(todoId, check);
+
+      if (checkTodo.matchedCount === 0) {
+        return res.status(400).json({ message: "대상없음", data: checkTodo });
+      }
+
+      return res.status(200).json({ message: "check 성공", data: checkTodo });
     } catch (err) {
       return res.status(500).json({ message: "putTodo 실패", error: err });
     }

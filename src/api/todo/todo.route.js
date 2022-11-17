@@ -5,9 +5,10 @@ const TodoController = require("./todo.controller");
 const todoController = new TodoController();
 
 //경로(/todo)
-router.get("/get", todoController.getTodo);
+router.get("/get/:projectId", todoController.getTodo);
 router.post("/post/:projectId", todoController.postTodo);
-router.put("/put", todoController.putTodo);
+router.put("/put/edit/:todoId", todoController.putTodo);
+router.put("/put/check/:todoId", todoController.checkTodo);
 router.delete("/delete/:todoId", todoController.deleteTodo);
 
 module.exports = router;

@@ -5,13 +5,10 @@ const Project = require("../../db/schemas/project");
 class TodoRepository {
   project = new Project();
 
-  getProjectAll = async (userId) => {
-    const getData = await project.getProject(userId);
-    return getData;
-  };
-
-  getProjectDetail = async (userId, projectId) => {
-    const getData = await project.getProject(userId, projectId);
+  getTodo = async (projectId) => {
+    console.log("리포 진행??");
+    console.log(projectId);
+    const getData = await Todo.find({ projectId: projectId });
     return getData;
   };
 
@@ -33,10 +30,22 @@ class TodoRepository {
     return postTodo;
   };
 
-  //기존 프로젝트 수정하기
-  putProject = async (userId) => {
-    const putProject = await this.projectRepository.putProject(userId);
-    return putProject;
+  //기존 투두 수정하기
+  putTodo = async (todoId, title) => {
+    const putTodo = Todo.updateOne(
+      { todoId: todoId.todoId },
+      { $set: { title } }
+    );
+    return putTodo;
+  };
+
+  //기존 체크 수정하기
+  checkTodo = async (todoId, check) => {
+    const checkTodo = Todo.updateOne(
+      { todoId: todoId.todoId },
+      { $set: { check } }
+    );
+    return checkTodo;
   };
 
   //기존 투두 삭제하기

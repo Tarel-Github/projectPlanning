@@ -12,7 +12,7 @@ const userController = new UserController();
 
 // const auth = require('../middlewares/authMiddleware')    //미들웨어는 잠시 보류
 
-// 로그인/
+//경로 (/user)
 router.post("/signup", userController.signUp); //회원가입 하기
 router.post("/signup/emailDup", userController.emailDup); //이메일 중복 체크
 router.post("/login", userController.login); //로그인 하기
