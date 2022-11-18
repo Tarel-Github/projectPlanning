@@ -7,20 +7,20 @@ require("dotenv").config(); //환경변수 쓸 일이 없다면 이부분 지울
 module.exports = async (req, res, next) => {
   try {
     const { authorization, refreshtoken } = req.headers;
-    console.log("어쓰 미들웨어의 공간========="); ///################
-    console.log(authorization); //Bearer 토큰이름 형태로 나옴
-    console.log("어쓰 미들웨어++++++++"); ///################
-    console.log(refreshtoken); //왜 리프레시 토큰은 언디파인드 일까?? 레디스에 저장하지 않아서??
+    // console.log("어쓰 미들웨어의 공간========="); ///################
+    // console.log(authorization); //Bearer 토큰이름 형태로 나옴
+    // console.log("어쓰 미들웨어++++++++"); ///################
+    // console.log(refreshtoken); //왜 리프레시 토큰은 언디파인드 일까?? 레디스에 저장하지 않아서??
     const tokenType = authorization.split(" ")[0];
     const accessToken = authorization.split(" ")[1];
 
-    console.log("중간보고"); ///################
+    // console.log("중간보고"); ///################
 
     const refreshToken = refreshtoken;
-    console.log(refreshtoken); ///################
-    console.log("토큰 타입======================"); ///################
-    console.log(tokenType); ///################
-    console.log("토큰 타입끝++++++++++++++"); ///################
+    // console.log(refreshtoken); ///################
+    // console.log("토큰 타입======================"); ///################
+    // console.log(tokenType); ///################
+    // console.log("토큰 타입끝++++++++++++++"); ///################
 
     //토큰 타입이 Bearer가 아닐경우 에러
     if (tokenType !== "Bearer")
