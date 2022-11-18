@@ -4,12 +4,14 @@ const router = express.Router();
 const TodoController = require("./todo.controller");
 const todoController = new TodoController();
 
+const auth = require("../../middleware/authMiddleware");
+
 //경로(/todo)
-router.get("/get/:projectId", todoController.getTodo);
-router.post("/post/:projectId", todoController.postTodo);
-router.put("/put/edit/:todoId", todoController.putTodo);
-router.put("/put/check/:todoId", todoController.checkTodo);
-router.delete("/delete/:todoId", todoController.deleteTodo);
+router.get("/get/:projectId", auth, todoController.getTodo);
+router.post("/post/:projectId", auth, todoController.postTodo);
+router.put("/put/edit/:todoId", auth, todoController.putTodo);
+router.put("/put/check/:todoId", auth, todoController.checkTodo);
+router.delete("/delete/:todoId", auth, todoController.deleteTodo);
 
 module.exports = router;
 

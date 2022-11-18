@@ -6,8 +6,6 @@ class TodoRepository {
   project = new Project();
 
   getTodo = async (projectId) => {
-    console.log("리포 진행??");
-    console.log(projectId);
     const getData = await Todo.find({ projectId: projectId });
     return getData;
   };
