@@ -15,7 +15,7 @@ app.use(express.json()); //json 파일을 서버 정보 주고 받는 것에 사
 app.use(express.urlencoded({ extended: false }));
 app.use(cors()); //cors 사용
 //app.use(express.static("static"))                   //html 파일을 불러오겠다는 뜻이다.
-app.use(express.static("front/html")); //html 파일을 불러오겠다는 뜻이다.
+app.use(express.static("front")); //front 폴더에 있는 html 파일을 불러오겠다는 뜻이다. 경로를 정할 땐 css파일도 포괄할 수 있는 곳에 경로를 정해주자
 
 // app.use(errorLogger); // Error Logger
 // app.use(errorHandler); // Error Handler
