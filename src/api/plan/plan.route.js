@@ -4,11 +4,13 @@ const router = express.Router();
 const PlanController = require("./plan.controller");
 const planController = new PlanController();
 
+const auth = require("../../middleware/authMiddleware");
+
 //경로(/plan)
-router.get("/get", planController.getPlan());
-router.post("/post", planController.postPlan());
-router.put("/put", planController.putPlan());
-router.delete("/delete", planController.deletePlan());
+router.get("/get/:projectId", auth, planController.getPlan);
+router.post("/post/:projectId", auth, planController.postPlan);
+router.put("/put/:planId", auth, planController.putPlan);
+router.delete("/delete/:planId", auth, planController.deletePlan);
 
 module.exports = router;
 

@@ -7,7 +7,34 @@ class PlanRepository {
     return getPlan;
   };
 
-  postPlan = async (projectId, title, content) => {};
+  postPlan = async (projectId, title, content) => {
+    const date = new Date();
+    let createdAt = date;
+    let updatedAt = createdAt;
+    let planId = date.valueOf();
+    const postPlan = await Plan.create({
+      planId,
+      projectId,
+      title,
+      content,
+      createdAt,
+      updatedAt,
+    });
+    return postPlan;
+  };
+
+  putPlan = async (planId, title, content) => {
+    const putPlan = await Plan.updateOne(
+      { planId: planId },
+      { $set: { title, content } }
+    );
+    return putPlan;
+  };
+
+  deletePlan = async (planId) => {
+    const deletePlan = await Plan.remove({ planId: planId });
+    return deletePlan;
+  };
 }
 
 module.exports = PlanRepository;

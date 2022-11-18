@@ -3,12 +3,12 @@ const router = express.Router();
 const path = require("path");
 
 const user = require("./user/user.route");
-//const plan = require('./plan/plan.route');
+const plan = require("./plan/plan.route");
 const project = require("./project/project.route");
 const todo = require("./todo/todo.route");
 
 router.use("/user", user);
-//router.use('/plan', plan);
+router.use("/plan", plan);
 router.use("/project", project);
 router.use("/todo", todo);
 
