@@ -73,9 +73,7 @@ class TodoController {
       const deleteTodo = await this.todoService.deleteTodo(todoId);
 
       if (deleteTodo.deletedCount === 0) {
-        return res
-          .status(400)
-          .json({ message: "삭제할 것이 없음", data: deleteTodo });
+        return res.status(400).json({ message: "대상없음", data: deleteTodo });
       }
 
       return res.status(200).json({ message: "Todo 삭제", data: deleteTodo });
