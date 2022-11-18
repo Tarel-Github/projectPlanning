@@ -6,8 +6,7 @@ class TodoController {
   //해당 프로젝트의 모든 투두 가져오기 // 완료
   getTodo = async (req, res, next) => {
     try {
-      //const {userId}= res.locals.user;
-      const userId = 1;
+      const { userId } = res.locals.user;
       const { projectId } = req.params;
       const getTodo = await this.todoService.getTodo(projectId);
       return res.status(200).json({ message: "todo리스트", data: getTodo });
@@ -19,9 +18,7 @@ class TodoController {
   //새로운 Todo 생성 // 완료
   postTodo = async (req, res, next) => {
     try {
-      console.log("요청 시작");
-      //const {userId}= res.locals.user;
-      const userId = 1;
+      const { userId } = res.locals.user;
       const { projectId } = req.params;
       const { title } = req.body;
 
@@ -35,8 +32,7 @@ class TodoController {
   //todo 수정 //완성
   putTodo = async (req, res, next) => {
     try {
-      //const {userId}= res.locals.user;
-      const userId = 1;
+      const { userId } = res.locals.user;
       const todoId = req.params;
       const { title } = req.body;
       const putTodo = await this.todoService.putTodo(todoId, title);
@@ -54,8 +50,7 @@ class TodoController {
   //todo 체크 //완성
   checkTodo = async (req, res, next) => {
     try {
-      //const {userId}= res.locals.user;
-      const userId = 1;
+      const { userId } = res.locals.user;
       const todoId = req.params;
       const { check } = req.body;
       const checkTodo = await this.todoService.checkTodo(todoId, check);
@@ -73,8 +68,7 @@ class TodoController {
   //Todo 삭제 // 완성
   deleteTodo = async (req, res, next) => {
     try {
-      //const {userId}= res.locals.user;
-      const userId = 1;
+      const { userId } = res.locals.user;
       const todoId = req.params;
       const deleteTodo = await this.todoService.deleteTodo(todoId);
 
