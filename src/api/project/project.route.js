@@ -4,7 +4,7 @@ const router = express.Router();
 const ProjectController = require("./project.controller");
 const projectController = new ProjectController();
 
-//경로(/project)
+//경로(/project) 프로젝트는 아직 미완성
 router.get("/get", projectController.getProjectAll);
 router.get("/get/:projectId", projectController.getProjectDetail);
 router.post("/post", projectController.postProject);
