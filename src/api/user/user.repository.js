@@ -28,8 +28,9 @@ class UserRepository {
   };
 
   //유저 이메일 파일을 가져옴
-  userFindEmail = async (email) => {
-    return await Users.findOne({ where: { email } });
+  dup = async (identifier) => {
+    const result = await User.find({ identifier: identifier });
+    return result[0];
   };
 }
 

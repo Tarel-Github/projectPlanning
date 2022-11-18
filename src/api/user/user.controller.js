@@ -38,7 +38,6 @@ class UserController {
   login = async (req, res, next) => {
     try {
       const { identifier, password } = req.body;
-      //const { email, password } = await loginSchema.validateAsync(req.body);
 
       //받아온 파일들로 유저 검증을 하고, 통과하면 토큰을 발급한다.
       const { accessToken, refreshToken } = await this.userService.verifyUser(
@@ -59,31 +58,25 @@ class UserController {
     }
   };
 
-  //이메일 중복 확인
-  emailDup = async (req, res, next) => {
+  //아이디 중복 확인
+  dup = async (req, res, next) => {
     try {
-      //입력받은 이메일을 검증하는 파일로 넘김
-      const { email } = await emailDupSchema.validateAsync(req.body);
+      const { identifier } = req.body;
 
       //이메일 내용이 공백일 경우
-      if (email == "") throw new Error("이메일을 입력해 주세요");
+      if (identifier == "") throw new Error("아이디를 입력해 주세요");
 
       //이메일을 중복확인을 하는 서비스로 보내기
-      const emailDup = await this.userService.dupCheckEmail(email);
+      const dup = await this.userService.dup(identifier);
       //중복이라면 값이 true가 나온다.
 
-      if (emailDup) {
-        return res
-          .status(400)
-          .json({ ok: false, errorMessage: "이메일이 이미 존재합니다" });
+      if (dup) {
+        return res.status(400).json({ errorMessage: "중복 Id입니다" });
       } else {
-        await this.userService.dupCheckEmail(email);
-        return res
-          .status(200)
-          .json({ ok: true, message: "사용 가능한 이메일입니다" });
+        return res.status(200).json({ message: "사용 가능한 Id입니다" });
       }
     } catch (error) {
-      next(error);
+      return res.status(500).json({ message: "중복확인 실패", error: err });
     }
   };
 }

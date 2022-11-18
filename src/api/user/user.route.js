@@ -14,7 +14,7 @@ const userController = new UserController();
 
 //경로 (/user)
 router.post("/signup", userController.signUp); //회원가입 하기
-router.post("/signup/emailDup", userController.emailDup); //이메일 중복 체크
+router.post("/signup/dup", userController.dup); //이메일 중복 체크
 router.post("/login", userController.login); //로그인 하기
 
 //앞으로 추가해야할 기능들
