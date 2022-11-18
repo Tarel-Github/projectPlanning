@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const planSchema = new mongoose.Schema(
+const plan = new mongoose.Schema(
   {
     planId: {
       type: Number,
@@ -33,4 +33,4 @@ const planSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model(`Plan`, planSchema);
+module.exports = mongoose.model(`Plan`, plan);
