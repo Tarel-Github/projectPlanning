@@ -33,4 +33,4 @@ const user = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model(`User`, user); //DB에 User라는 이름의 폴더를 생성한다.
+module.exports = mongoose.model(`User`, user);
