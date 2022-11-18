@@ -5,6 +5,7 @@ const todo = new mongoose.Schema(
     todoId: {
       type: Number,
       required: true,
+      unique: true,
     },
     projectId: {
       type: Number,
