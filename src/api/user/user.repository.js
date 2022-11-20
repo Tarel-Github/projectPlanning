@@ -24,7 +24,8 @@ class UserRepository {
 
   //로그인시 들어온 요청에 따라 계정정보 가져옴
   findIdentifier = async (identifier) => {
-    return await User.find({ identifier: identifier });
+    const data = await User.find({ identifier: identifier });
+    return data;
   };
 
   //유저 이메일 파일을 가져옴

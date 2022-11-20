@@ -40,7 +40,7 @@ module.exports = async (req, res, next) => {
     const validateRefreshToken = async (refreshToken) => {
       try {
         const decoded = jwt.decode(accessToken); // decode 명령은 뭔가
-        const token = await redisCli.get(`${decoded.userId}`);
+        const token = await redisCli.get(`${decoded.identifier}`);
         console.log(token);
         if (refreshToken === token) {
           jwt.verify(refreshToken, process.env.SECRET_KEY);
@@ -66,7 +66,7 @@ module.exports = async (req, res, next) => {
     if (refreshToken && accessToken && isRefreshTokenValidate) {
       const decoded = jwt.decode(accessToken);
       const newAccessToken = jwt.sign(
-        { userId: decoded.userId, userKey: decoded.userKey },
+        { identifier: decoded.identifier, userId: decoded.userId },
         process.env.SECRET_KEY
         // {
         //   expiresIn: "60s",
@@ -84,14 +84,12 @@ module.exports = async (req, res, next) => {
       return res.status(401).json({ message: "토큰 만료" });
     } else if (accessToken !== "undefined") {
       /**토큰이 유효한 경우 */
-      const { userId } = jwt.verify(accessToken, process.env.SECRET_KEY);
-      console.log("유저아이디");
-      console.log(userId);
-      const user = await User.findOne({ where: { userId: userId } });
+      const identifier = jwt.verify(accessToken, process.env.SECRET_KEY);
+      const user = await User.findOne({ identifier: identifier.identifier });
       res.locals.user = user;
     } else {
       //토큰이 없는 요청일시 익명유저 정보를 저장
-      res.locals.user = { userKey: 0, userId: "Anonymous" };
+      res.locals.user = { userId: 0, identifier: "Anonymous" };
     }
     next();
   } catch (err) {
