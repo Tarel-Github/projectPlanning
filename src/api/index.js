@@ -23,9 +23,9 @@ router.get("/main", (req, res) => {
   res.sendFile(path.join(__dirname, "../../front/html/main.html"));
 });
 
-router.get("/project/get/:projectId", (req, res) => {
+router.get("/project/:projectId", (req, res) => {
   console.log("상세보기 페이지를 출력합니다");
-  res.sendFile(path.join(__dirname, "../../front/html/main.html"));
+  res.sendFile(path.join(__dirname, "../../front/html/project.detail.html"));
 });
 
 module.exports = router;

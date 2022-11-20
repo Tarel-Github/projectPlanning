@@ -19,8 +19,9 @@ function myProjectList() {
               let cAt = createdAt.split("T")[0]
               let updatedAt = rows[i]['updatedAt']
               let uAt = updatedAt.split("T")[0]
-              let temp_html = `                                  
-                                <tr onclick="location.href='/project/get/${projectId}'" value ="page move">
+              let temp_html = `                 
+                                <tr onclick="location.href='/project/${projectId}'" value ="page move">                 
+                                <!--<tr onclick="location.href='/project/get/${projectId}'" value ="page move">-->
                                     <td style="width: 50px;">${num}</td>
                                     <td style="width: 700px;">${title}</td>
                                     <td style="width: 250px;">${cAt}</td>
