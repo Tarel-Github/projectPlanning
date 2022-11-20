@@ -12,7 +12,9 @@ class ProjectRepository {
 
   //해당 프로젝트 자세히 보기
   getProjectDetail = async (userId, projectId) => {
-    const getData = await Project.getProject(userId, projectId);
+    const getData = await Project.find({
+      projectId: projectId,
+    });
     return getData;
   };
 
@@ -35,14 +37,14 @@ class ProjectRepository {
 
   //기존 프로젝트 정보 가져오기
   infoProject = async (projectId) => {
-    const data = await Project.find({ projectId: projectId.projectId });
+    const data = await Project.find({ projectId: projectId });
     return data;
   };
 
   //기존 프로젝트 수정하기
   putProject = async (userId, projectId, title) => {
     const putProject = await Project.updateOne(
-      { projectId: projectId.projectId },
+      { projectId: projectId },
       { $set: { title } }
     );
     return putProject;

@@ -11,6 +11,13 @@ class ProjectService {
 
   //해당 프로젝트 자세히 보기
   getProjectDetail = async (userId, projectId) => {
+    const infoProject = await this.projectRepository.infoProject(projectId);
+
+    const author = infoProject[0].userId;
+    if (userId !== author) {
+      return;
+    }
+
     const getProject = await this.projectRepository.getProjectDetail(
       userId,
       projectId
@@ -27,7 +34,6 @@ class ProjectService {
   //기존 프로젝트 수정하기
   putProject = async (userId, projectId, title) => {
     const infoProject = await this.projectRepository.infoProject(projectId);
-    console.log(infoProject[0]);
 
     const author = infoProject[0].userId;
     if (userId !== author) {
