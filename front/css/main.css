@@ -30,5 +30,15 @@ body {
   .btn-check{
     width: 1000px;
   }
+  .projectList{
+    background-color: white;
+    color: black;
+    width: 70%;
+    min-width: 700px;
+    margin: auto;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
 
     
