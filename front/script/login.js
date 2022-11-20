@@ -1,7 +1,5 @@
 function login() {
-  console.log("이게 되긴 하나?????");
   let identifier = $("#identifier").val();
-  console.log("실행??");
   let password = $("#password").val();
 
   $.ajax({
@@ -16,14 +14,76 @@ function login() {
       password: password,
     }),
     success: function (response) {
+      console.log("실행 왔나?")
       alert(response["message"]);
-      console.log("된건가???");
       //window.location.reload();
+      console.log("여기까지 왔나?")
+      gotoMainPage()
+      console.log("쫌 와라")
     },
     error: function (error) {
+      alert("아이디 또는 비밀번호 에러 입니다.");
       customAlert(error.responseJSON.errorMessage);
     },
   });
+}
+
+function signup() {
+  let identifier = $("#signup_identifier").val();
+  let password = $("#signup_password").val();
+  let confirm = $("#signup_confirm").val();
+  let nickname = $("#signup_nickname").val();
+  $.ajax({
+    type: "POST",
+    url: "/user/signup",
+    // headers: {
+    //   authorization: `Bearer ${localStorage.getItem("token")}`,
+    // },
+    contentType: "application/json",
+    data: JSON.stringify({
+      identifier: identifier,
+      password: password,
+      confirm: confirm,
+      nickname: nickname,
+    }),
+    success: function (response) {
+      alert(response["message"]);
+      //window.location.reload();
+    },
+    error: function (error) {
+      alert("입력내용을 확인해 주세요.");
+      customAlert(error.responseJSON.errorMessage);
+    },
+  });
+}
+
+
+function dup() {
+  let identifier = $("#signup_identifier").val();
+
+  $.ajax({
+    type: "POST",
+    url: "/user/signup/dup",
+    // headers: {
+    //   authorization: `Bearer ${localStorage.getItem("token")}`,
+    // },
+    contentType: "application/json",
+    data: JSON.stringify({
+      identifier: identifier,
+    }),
+    success: function (response) {
+      alert(response["message"]);
+      //window.location.reload();
+    },
+    error: function (error) {
+      alert("사용할 수 없는 아이디 입니다..");
+      customAlert(error.responseJSON.errorMessage);
+    },
+  });
+}
+
+function gotoMainPage(){
+  location.href=`/main`
 }
 
 function customAlert(text, confirmCallback) {
@@ -33,3 +93,4 @@ function customAlert(text, confirmCallback) {
     $("#alertModal .btn-confirm").click(confirmCallback);
   }
 }
+

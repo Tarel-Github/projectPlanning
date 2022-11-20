@@ -1,5 +1,6 @@
 body {
   background-image: linear-gradient(rgb(0, 225, 200), rgb(255, 255, 255));
+  height: 1200px;
   color: aqua;
 }
 .info {
@@ -12,9 +13,16 @@ body {
   margin-bottom: 1%;
   text-align: center;
   padding: 40px;
+  border-radius: 40px;
 }
 .inputBox {
-  width: 1000px;
+  width: 500px;
+  height: 260px;
   margin: auto;
+  padding: 20px;
   margin-bottom: 20%;
+  color:black;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 1px 1px 1px 1px gray ;
 }
