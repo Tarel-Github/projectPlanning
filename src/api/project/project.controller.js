@@ -7,8 +7,6 @@ class ProjectController {
   getProjectAll = async (req, res, next) => {
     try {
       const { userId } = res.locals.user;
-      //const userId = 1;
-      console.log(userId);
       const getProject = await this.projectService.getProjectAll(userId);
       return res.status(200).json({ data: getProject });
     } catch (err) {
@@ -22,7 +20,6 @@ class ProjectController {
   getProjectDetail = async (req, res, next) => {
     try {
       const { userId } = res.locals.user;
-      //const userId = 1;
       const { projectId } = req.params;
 
       const getProject = await this.projectService.getProjectDetail(
@@ -41,8 +38,6 @@ class ProjectController {
   postProject = async (req, res, next) => {
     try {
       const { userId } = res.locals.user;
-      //console.log(userId);
-      //const userId = 1;
       const { title } = req.body;
       const postProject = await this.projectService.postProject(userId, title);
       return res.status(200).json({ data: postProject });
@@ -57,7 +52,6 @@ class ProjectController {
       const { userId } = res.locals.user;
       const { title } = req.body;
       const projectId = req.params;
-      //const userId = 1;
       const putProject = await this.projectService.putProject(
         userId,
         projectId,
@@ -80,7 +74,6 @@ class ProjectController {
   deleteProject = async (req, res, next) => {
     try {
       const { userId } = res.locals.user;
-      //const userId = 1;
       const projectId = req.params;
       const deleteProject = await this.projectService.deleteProject(
         userId,
