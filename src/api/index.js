@@ -18,4 +18,9 @@ router.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "../../front/html/login.html"));
 });
 
+router.get("/main", (req, res) => {
+  console.log("메인페이지를 출력합니다");
+  res.sendFile(path.join(__dirname, "../../front/html/main.html"));
+});
+
 module.exports = router;
