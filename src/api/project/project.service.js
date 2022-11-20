@@ -25,16 +25,31 @@ class ProjectService {
   };
 
   //기존 프로젝트 수정하기
-  putProject = async (userId) => {
+  putProject = async (userId, projectId, title) => {
+    const infoProject = await this.projectRepository.infoProject(projectId);
+    console.log(infoProject[0]);
+
+    const author = infoProject[0].userId;
+    if (userId !== author) {
+      return;
+    }
+
     const putProject = await this.projectRepository.putProject(
       userId,
-      projectId
+      projectId,
+      title
     );
     return putProject;
   };
 
   //기존 프로젝트 삭제하기//완성
-  deleteProject = async (projectId) => {
+  deleteProject = async (userId, projectId) => {
+    const infoProject = await this.projectRepository.infoProject(projectId);
+    const author = infoProject[0].userId;
+    if (userId !== author) {
+      return;
+    }
+
     const deleteProject = await this.projectRepository.deleteProject(projectId);
     return deleteProject;
   };

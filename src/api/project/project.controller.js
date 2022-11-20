@@ -55,11 +55,22 @@ class ProjectController {
   putProject = async (req, res, next) => {
     try {
       const { userId } = res.locals.user;
+      const { title } = req.body;
+      const projectId = req.params;
       //const userId = 1;
       const putProject = await this.projectService.putProject(
         userId,
-        projectId
+        projectId,
+        title
       );
+
+      if (!putProject) {
+        return res.status(400).json({ message: "수정 권한 없음" });
+      }
+
+      return res
+        .status(200)
+        .json({ message: "putProject 성공", data: putProject });
     } catch (err) {
       return res.status(500).json({ message: "putProject 실패", error: err });
     }
@@ -71,7 +82,15 @@ class ProjectController {
       const { userId } = res.locals.user;
       //const userId = 1;
       const projectId = req.params;
-      const deleteProject = await this.projectService.deleteProject(projectId);
+      const deleteProject = await this.projectService.deleteProject(
+        userId,
+        projectId
+      );
+
+      if (!deleteProject) {
+        return res.status(400).json({ message: "삭제 권한 없음" });
+      }
+
       return res
         .status(200)
         .json({ message: "삭제 성공", data: deleteProject });

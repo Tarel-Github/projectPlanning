@@ -10,7 +10,7 @@ const auth = require("../../middleware/authMiddleware");
 router.get("/get", auth, projectController.getProjectAll);
 router.get("/get/:projectId", auth, projectController.getProjectDetail);
 router.post("/post", auth, projectController.postProject);
-router.put("/put", auth, projectController.putProject);
+router.put("/put/:projectId", auth, projectController.putProject);
 router.delete("/delete/:projectId", auth, projectController.deleteProject);
 
 module.exports = router;
