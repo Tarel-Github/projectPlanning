@@ -4,12 +4,14 @@ const router = express.Router();
 const ProjectController = require("./project.controller");
 const projectController = new ProjectController();
 
+const auth = require("../../middleware/authMiddleware");
+
 //경로(/project) 프로젝트는 아직 미완성
-router.get("/get", projectController.getProjectAll);
-router.get("/get/:projectId", projectController.getProjectDetail);
-router.post("/post", projectController.postProject);
-router.put("/put", projectController.putProject);
-router.delete("/delete/:projectId", projectController.deleteProject);
+router.get("/get", auth, projectController.getProjectAll);
+router.get("/get/:projectId", auth, projectController.getProjectDetail);
+router.post("/post", auth, projectController.postProject);
+router.put("/put", auth, projectController.putProject);
+router.delete("/delete/:projectId", auth, projectController.deleteProject);
 
 module.exports = router;
 

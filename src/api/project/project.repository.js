@@ -6,7 +6,7 @@ class ProjectRepository {
 
   //특정 유저의 모든 프로젝트 가져오기
   getProjectAll = async (userId) => {
-    const getData = await project.getProject(userId);
+    const getData = await Project.find({ userId: userId });
     return getData;
   };
 
