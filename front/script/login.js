@@ -14,12 +14,9 @@ function login() {
       password: password,
     }),
     success: function (response) {
-      console.log("실행 왔나?")
       alert(response["message"]);
       //window.location.reload();
-      console.log("여기까지 왔나?")
       gotoMainPage()
-      console.log("쫌 와라")
     },
     error: function (error) {
       alert("아이디 또는 비밀번호 에러 입니다.");
