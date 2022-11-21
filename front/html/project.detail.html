@@ -27,23 +27,118 @@
     </div>
 
     <div class="topBox">
+
       <div class="inBox">
+ 
           <div class = "planBox">
             플랜 박스
-            <div id="planList" ></div>
-            <div style="text-align:center" onclick=newPlan()>+</div>
+            <!---->
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">번호</th>
+                  <th scope="col">제목</th>
+                  <th scope="col">작성일</th>
+                  <th scope="col">수정일</th>
+                  <th scope="col">수정</th>
+                  <th scope="col">삭제</th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider" id="planList">
+                
+              </tbody>
+            </table>
+            <!---->
+
+
+
+
+            <div  ></div>
+            <div style="text-align:center"> 
+              <button type="button" class="btn btn-primary" onclick=postPlan()  >목록추가</button>
+             </div>
           </div>
       
           <div class = "todoBox">
             투두 박스
-            <div id="todoList" ></div>
-            <div style="text-align:center" onclick=newTodo()>+</div>
+            <!---->
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">체크</th>
+                  <th scope="col">번호</th>
+                  <th scope="col">제목</th>
+                  <th scope="col">작성일</th>
+                  <th scope="col">수정일</th>
+                  <th scope="col">수정</th>
+                  <th scope="col">삭제</th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider" id="todoList">
+
+              </tbody>
+            </table>
+            <!---->
+
+
+
+
+
+            <div ></div>
+            <!-- Button trigger modal -->
+            <div style="text-align:center"> 
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >목록추가</button>
+             </div>
+
+              
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">새로운 할 일 목록 작성</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="mb-3">
+                      <div class="mb-3">
+                        <label for="message-text" class="col-form-label">입력내용:</label>
+                        <textarea class="form-control" id="todoContent"></textarea>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-primary" onclick="postTodo()">추가하기</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           </div>
       </div>
 
 
       <div class = "fileBox">
         파일 박스
+        <div id="fileList" ></div>
+        <div style="text-align:center" onclick=newFile()>+</div>
       </div>
 
 
