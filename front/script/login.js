@@ -1,7 +1,7 @@
 function login() {
   let identifier = $("#identifier").val();
   let password = $("#password").val();
-  console.log(identifier, password)
+  console.log(identifier, password);
 
   $.ajax({
     type: "POST",
@@ -16,13 +16,11 @@ function login() {
     }),
     success: function (response) {
       alert(response["message"]);
-      localStorage.setItem("token", response.accessToken);//
-      window.location.replace("/main");//
+      localStorage.setItem("token", response.accessToken); //
+      window.location.replace("/main"); //
       //window.location.reload();
     },
     error: function (error) {
-      console.log(identifier)
-
       alert("아이디 또는 비밀번호 에러 입니다.");
       customAlert(error.responseJSON.errorMessage);
     },
@@ -58,7 +56,6 @@ function signup() {
   });
 }
 
-
 function dup() {
   let identifier = $("#signup_identifier").val();
 
@@ -83,8 +80,6 @@ function dup() {
   });
 }
 
-
-
 function customAlert(text, confirmCallback) {
   $("#alertText").text(text);
   $("#alertModal").modal("show");
@@ -92,4 +87,3 @@ function customAlert(text, confirmCallback) {
     $("#alertModal .btn-confirm").click(confirmCallback);
   }
 }
-
