@@ -13,6 +13,11 @@ router.use("/project", project);
 router.use("/todo", todo);
 
 //여기에 경로별 사용할 html을 작성
+router.get("/", (req, res) => {
+  console.log("첫번째 페이지를 출력합니다.");
+  res.sendFile(path.join(__dirname, "../../front/html/start.html"));
+});
+
 router.get("/login", (req, res) => {
   console.log("로그인 페이지를 출력합니다");
   res.sendFile(path.join(__dirname, "../../front/html/login.html"));
