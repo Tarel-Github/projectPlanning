@@ -27,7 +27,7 @@ class PlanController {
         title,
         content
       );
-      return res.status(200).json({ message: "plan리스트", data: postPlan });
+      return res.status(200).json({ message: "새로운plan", data: postPlan });
     } catch (err) {
       return res.status(500).json({ message: "postPlan실패", error: err });
     }

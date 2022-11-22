@@ -29,8 +29,29 @@ router.get("/main", (req, res) => {
 });
 
 router.get("/project/:projectId", (req, res) => {
-  console.log("상세보기 페이지를 출력합니다");
+  console.log("프로젝트 상세보기 페이지를 출력합니다");
   res.sendFile(path.join(__dirname, "../../front/html/project.detail.html"));
+});
+
+// router.get("/project/detail/:planId", (req, res) => {
+//   console.log("플렌 상세보기 페이지를 출력합니다");
+//   res.sendFile(
+//     path.join(__dirname, "../../front/html/project.detail.plan.html")
+//   );
+// });
+
+router.get("/project/detail/:planId", (req, res) => {
+  console.log("플렌 작성하기 페이지를 출력합니다");
+  res.sendFile(
+    path.join(__dirname, "../../front/html/project.detail.plan.post.html")
+  );
+});
+
+router.get("/project/put/:planId", (req, res) => {
+  console.log("플렌 수정하기 페이지를 출력합니다");
+  res.sendFile(
+    path.join(__dirname, "../../front/html/project.detail.plan.put.html")
+  );
 });
 
 module.exports = router;
