@@ -40,18 +40,14 @@ router.get("/project/:projectId", (req, res) => {
 //   );
 // });
 
-router.get("/project/detail/:planId", (req, res) => {
+router.get("/project/detail/post/:planId", (req, res) => {
   console.log("플렌 작성하기 페이지를 출력합니다");
-  res.sendFile(
-    path.join(__dirname, "../../front/html/project.detail.plan.post.html")
-  );
+  res.sendFile(path.join(__dirname, "../../front/html/plan.post.html"));
 });
 
-router.get("/project/put/:planId", (req, res) => {
+router.get("/project/detail/put/:planId", (req, res) => {
   console.log("플렌 수정하기 페이지를 출력합니다");
-  res.sendFile(
-    path.join(__dirname, "../../front/html/project.detail.plan.put.html")
-  );
+  res.sendFile(path.join(__dirname, "../../front/html/plan.put.html"));
 });
 
 module.exports = router;

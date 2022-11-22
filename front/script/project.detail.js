@@ -142,15 +142,13 @@ function getPlan() {
                 let temp_html = `               
                     <tr style="width: 99%;"   value ="page move">                 
                         <td style="width: 7.5%; min-width: 50px;">${num}</td>
-                        <td style="width: 50%; min-width: 200px;">${title}</td>
+                        <td style="width: 50%; min-width: 200px;" onclick="location.href='/project/detail/put/${planId}'">${title}</td>
                         <td style="width: 15%; min-width: 75px;">${cAt_2}</td>
                         <td style="width: 15%; min-width: 75px;">${uAt_2}</td>
                         <td style="width: 5%; min-width: 75px;">
-                            <button type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                            <button type="button" class="btn btn-primary" onclick="location.href='/project/detail/put/${planId}'" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                 수정
                             </button>
-
-
                         </td>
 
                         
@@ -179,8 +177,6 @@ function getPlan() {
                                     </div>
                                 </div>
                             </div>
-
-
 
 
                         </td>
