@@ -46,7 +46,7 @@ class PlanController {
         return res.status(400).json({ message: "대상없음", data: putPlan });
       }
 
-      return res.status(200).json({ message: "plan리스트", data: putPlan });
+      return res.status(200).json({ message: "plan수정완료", data: putPlan });
     } catch (err) {
       return res.status(500).json({ message: "putPlan실패", error: err });
     }

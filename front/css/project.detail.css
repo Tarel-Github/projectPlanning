@@ -76,7 +76,11 @@ body {
         padding: 10px;
         width: 95%;
         margin: auto;
+
+        position: absolute;
         border-radius: 5px;
+        top: 100%;
+        left: 2.5%;
         
 
     }

@@ -237,6 +237,11 @@ function putTodo(param) {
     });
 }
 
+function moveToPostPlan(){
+    let address = unescape(location.href)
+    let param = address.split("/")[4];
+    window.location.replace('/project/detail/post/'+param)
+}
 
 function deleteTodo(param) {
     $.ajax({
@@ -282,6 +287,9 @@ function check() {
 
 }
 
+function newFile(){
+    
+}
 
 
 

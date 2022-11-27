@@ -39,6 +39,17 @@ body {
     padding: 10px;
     border-radius: 5px;
   }
+  .projectSlot{
+    background-color: aquamarine;
+    color: black;
+    height: 30px;
+    margin: 5px;
+    padding: 5px, 5px, 5px, 5px;
+    border-radius: 5px;
+
+    border-style: solid;
+    border-color: gray;
+  }
   
 
     

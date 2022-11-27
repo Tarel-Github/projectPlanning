@@ -46,13 +46,13 @@ function getData() {
 
 function putPlan() {
     let address = unescape(location.href)
-    let param = address.split("/")[4];
-
-    let title = $("planTitle").val();
+    let param = address.split("/")[6];
+    console.log(param)
+    let title = $("#planTitle").val();
     let content = $("#planContent").val();
     $.ajax({
         type: "PUT",
-        url: "/plan/post/"+param,
+        url: "/plan/put/"+param,
         contentType: "application/json",
         headers: {
             authorization: `Bearer ${localStorage.getItem("token")}`
@@ -63,8 +63,11 @@ function putPlan() {
         }),
         success: function (response) {
             let rows = response.data
+            let id = rows[0].projectId
+            console.log(rows[0])
+            console.log(id)
             alert(response["message"]) 
-            // window.location.reload()
+            window.location.replace("/project/" + id); //
           },
         error: function (error) {
             alert("에러") ;

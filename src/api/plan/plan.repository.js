@@ -28,7 +28,8 @@ class PlanRepository {
       { planId: planId },
       { $set: { title, content } }
     );
-    return putPlan;
+    const data = await Plan.find({ planId: planId });
+    return data;
   };
 
   deletePlan = async (planId) => {
