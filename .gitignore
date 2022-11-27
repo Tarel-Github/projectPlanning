@@ -1,6 +1,7 @@
 node_modules
 .env
 memo.txt
+storage
 
 front/html/test.html
 front/html/backup.html

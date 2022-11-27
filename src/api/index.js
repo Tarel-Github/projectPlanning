@@ -6,11 +6,14 @@ const user = require("./user/user.route");
 const plan = require("./plan/plan.route");
 const project = require("./project/project.route");
 const todo = require("./todo/todo.route");
+const file = require("./file/file.route");
 
 router.use("/user", user);
 router.use("/plan", plan);
 router.use("/project", project);
 router.use("/todo", todo);
+
+router.use("/file", file);
 
 //여기서부터 프론트엔드====================================================================
 //여기에 경로별 사용할 html을 작성
@@ -49,6 +52,11 @@ router.get("/project/detail/post/:projectId", (req, res) => {
 router.get("/project/detail/put/:planId", (req, res) => {
   console.log("플렌 수정하기 페이지를 출력합니다");
   res.sendFile(path.join(__dirname, "../../front/html/plan.put.html"));
+});
+
+router.get("/project/file/test", (req, res) => {
+  console.log("사진페이지를 출력합니다.");
+  res.sendFile(path.join(__dirname, "../../front/html/multipart.html"));
 });
 
 module.exports = router;

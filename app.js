@@ -3,6 +3,12 @@ const express = require("express"); //익스프레스 사용 명령어
 //const jwt = require("jsonwebtoken");              //jwt 사용 명령어
 const cors = require("cors"); //자신이 아닌 다른 도메인, 다른 프로토콜, 다른 포트에 있는 리소스를 요청하는 장치
 const path = require("path");
+const multer = require("multer"); //멀터
+const fs = require("fs"); //멀터
+
+//이미지 업로드 기능 시작=====================
+
+//이미지 업로드 기능 끝=====================
 
 const router = require("./src/api/index"); //index 파일 가져옴
 const connect = require("./src/db/schemas/index.js"); //몽구스를 위한 스키마 index 가져옴

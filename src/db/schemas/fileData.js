@@ -1,25 +1,18 @@
 const mongoose = require("mongoose");
 
-const file = new mongoose.Schema(
+const fileData = new mongoose.Schema(
   {
-    fileId: {
+    fileDataId: {
       type: Number,
       required: true,
       unique: true,
     },
-    // projectId: {
-    //   type: Number,
-    //   required: true,
-    // },
-    userId: {
+    fileId: {
       type: Number,
       required: true,
     },
-    title: {
-      type: String,
-      required: true,
-    },
-    content: {
+
+    fileImage: {
       type: String,
       required: true,
     },
@@ -37,4 +30,4 @@ const file = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model(`File`, file);
+module.exports = mongoose.model(`FileData`, fileData);
