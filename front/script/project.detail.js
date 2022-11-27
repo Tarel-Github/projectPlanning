@@ -31,7 +31,7 @@ function getTodo() {
                 let updatedAt = rows[i]['updatedAt']
                 let uAt = updatedAt.split("T")[0]
                 let uAt_2 = uAt.split("-")[1] + "-"+ uAt.split("-")[2]
-                let temp_html = `               
+                let temp_html = `
                     <tr>
                         <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
 
