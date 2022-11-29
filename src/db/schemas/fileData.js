@@ -11,7 +11,10 @@ const fileData = new mongoose.Schema(
       type: Number,
       required: true,
     },
-
+    projectId: {
+      type: Number,
+      required: true,
+    },
     fileImage: {
       type: String,
       required: true,

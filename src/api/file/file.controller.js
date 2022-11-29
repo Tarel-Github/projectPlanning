@@ -7,10 +7,12 @@ class FileController {
     try {
       const { userId } = res.locals.user;
       const { title, content } = req.body;
+      const { projectId } = req.params;
       const image = req.file;
 
       const postFileText = await this.fileService.postFileText(
         userId,
+        projectId,
         title,
         content
       );
@@ -20,7 +22,7 @@ class FileController {
         //const imageUrl = image.map((url) => url.location);
         const imageName = image.filename;
         console.log(imageName);
-        await this.fileService.postFileImage(fileId, imageName);
+        await this.fileService.postFileImage(fileId, projectId, imageName);
       }
 
       res.status(200).json({ msg: "test 성공", data: postFileText });
@@ -34,7 +36,8 @@ class FileController {
     try {
       const { userId } = res.locals.user;
       const { projectId } = req.params;
-      const getFile = await this.fileService.getFile(projectId);
+
+      const getFile = await this.fileService.getFile(projectId, req);
       return res.status(200).json({ message: "file리스트", data: getFile });
     } catch (err) {
       return res.status(500).json({ message: "getFile실패", error: err });

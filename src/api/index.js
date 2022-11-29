@@ -12,8 +12,13 @@ router.use("/user", user);
 router.use("/plan", plan);
 router.use("/project", project);
 router.use("/todo", todo);
-
 router.use("/file", file);
+
+//여기서부터 이미지==============================================================
+const ImageFile = require("./image");
+const imageFile = new ImageFile();
+
+router.get("/imgs/:name", imageFile.imageFile);
 
 //여기서부터 프론트엔드====================================================================
 //여기에 경로별 사용할 html을 작성
@@ -44,9 +49,14 @@ router.get("/project/:projectId", (req, res) => {
 //   );
 // });
 
-router.get("/project/detail/post/:projectId", (req, res) => {
+router.get("/project/detail/postPlan/:projectId", (req, res) => {
   console.log("플렌 작성하기 페이지를 출력합니다");
   res.sendFile(path.join(__dirname, "../../front/html/plan.post.html"));
+});
+
+router.get("/project/detail/postFile/:projectId", (req, res) => {
+  console.log("파일 작성하기 페이지를 출력합니다");
+  res.sendFile(path.join(__dirname, "../../front/html/file.post.html"));
 });
 
 router.get("/project/detail/put/:planId", (req, res) => {
@@ -59,4 +69,5 @@ router.get("/project/file/test", (req, res) => {
   res.sendFile(path.join(__dirname, "../../front/html/multipart.html"));
 });
 
+//================================================================
 module.exports = router;

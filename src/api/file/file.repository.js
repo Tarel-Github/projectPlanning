@@ -1,14 +1,16 @@
 const File = require("../../db/schemas/file");
 const FileData = require("../../db/schemas/fileData");
+const fs = require("fs");
 
 class FileRepository {
-  postFileText = async (userId, title, content) => {
+  postFileText = async (userId, projectId, title, content) => {
     const date = new Date();
     let fileId = date.valueOf();
     let createdAt = date;
     let updatedAt = createdAt;
     const postFileText = await File.create({
       fileId,
+      projectId,
       userId,
       title,
       content,
@@ -18,34 +20,29 @@ class FileRepository {
     return postFileText;
   };
 
-  postFileImage = async (fileId, imageName) => {
+  postFileImage = async (fileId, projectId, imageName) => {
     const date = new Date();
     let fileDataId = date.valueOf();
     let createdAt = date;
     let updatedAt = createdAt;
-
     const postFileImage = await FileData.create({
       fileDataId,
       fileId,
+      projectId,
       fileImage: imageName,
       createdAt,
       updatedAt,
     });
     return postFileImage;
-
-    // for (let i = 0; i < imageName.length; i++) {
-    //   await FileData.create({
-    //     fileDataId,
-    //     fileId,
-    //     fileImage: imageName[i],
-    //     createdAt,
-    //     updatedAt,
-    //   });
-    // }
   };
 
-  getFile = async (projectId) => {
+  getFileText = async (projectId) => {
     const getFile = await File.find({ projectId: projectId });
+    return getFile;
+  };
+
+  getFileImage = async (projectId) => {
+    const getFile = await FileData.find({ projectId: projectId });
     return getFile;
   };
 

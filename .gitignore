@@ -3,5 +3,7 @@ node_modules
 memo.txt
 storage
 
+front/html/multipart.html
+
 front/html/test.html
 front/html/backup.html

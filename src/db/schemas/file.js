@@ -7,10 +7,10 @@ const file = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    // projectId: {
-    //   type: Number,
-    //   required: true,
-    // },
+    projectId: {
+      type: Number,
+      required: true,
+    },
     userId: {
       type: Number,
       required: true,
