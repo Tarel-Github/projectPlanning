@@ -212,6 +212,8 @@ function postTodo() {
   });
 }
 
+function check() {}
+
 function putTodo(param) {
   let content = $("#putTodoContent" + param).val();
   $.ajax({
@@ -307,7 +309,7 @@ function getFile() {
         let uAt_2 = uAt.split("-")[1] + "-" + uAt.split("-")[2];
         
         let temp_html = `  
-                <div class="card" style="width: 22.5%; float: left; margin:1%; height: 300px">
+                <div class="card" style="width: 22.5%; float: left; margin:1%; height: 400px">
                     <img src = "/imgs/${ImageFile}", height="100%", class="card-img-top", alt="이건 출력되면 안됌">
                     <div class="card-body">
                         <h5 class="card-title">${textTitle}</h5>
@@ -329,10 +331,19 @@ function getFile() {
   });
 }
 
+function detailFile(){
 
-function check() {}
+}
 
-function newFile() {}
+function putFile(){
+
+}
+
+function deleteFile(){
+  
+}
+
+
 
 function customAlert(text, confirmCallback) {
   $("#alertText").text(text);

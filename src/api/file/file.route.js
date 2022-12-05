@@ -24,6 +24,8 @@ const up = multer({
   limits: { fileSize: 5 * 1024 * 1024 },
 });
 /*upload.single("name"),*/
+
+//========================================================
 //경로(/file)
 //모든 파일 열람, 파일 업로드, 파일 수정, 파일 삭제
 //router.post("/test", auth, upload.single("name"), fileCon.uploadFile);

@@ -1,19 +1,28 @@
+
+
 function postFile(){
     let address = unescape(location.href)
     let param = address.split("/")[6];
-    let title = $("#fileTitle").val();
-    let content = $("#fileContent").val();
+
+    const imageInput = $("#file_get")[0]
+
     let formdata = new FormData();
-    console.log(title, content)
-    console.log(formData)
+    formdata.append("title", $("#fileContent"));
+    formdata.append("content",$("fileContent"));
+    formdata.append("name", imageInput.files[0]);
+
+
+    //이미지를 올릴땐 enctype, processData, contentType을 넣을 것
     $.ajax({
         type: "POST",
+        enctype: 'multipart/form-data',
         url: "/file/post/"+param,
         contentType: "application/json",
         headers: { authorization: `Bearer ${localStorage.getItem("token")}`},
-        data: formData,
+        data: formdata,
+        processData: false,
+        contentType: false,
         success: function (response) {
-
             alert(response["msg"]) 
             window.location.replace('/project/'+param)
           },
