@@ -6,6 +6,7 @@ const path = require("path");
 const multer = require("multer"); //멀터
 const http = require("http");
 const fs = require("fs"); //멀터
+const logger = require("./logger"); //콘솔로그 대체품 logger.info(), logger.error() 형태로 사용
 
 //이미지 업로드 기능 시작=====================
 
