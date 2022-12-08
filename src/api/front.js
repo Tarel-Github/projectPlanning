@@ -7,22 +7,22 @@ const path = require("path");
 
 router.get("/", (req, res) => {
   console.log("첫번째 페이지를 출력합니다.");
-  res.sendFile(path.join(__dirname, "../../front/html/start.html"));
+  res.sendFile(path.join(__dirname, "../../front/start/start.html"));
 });
 
 router.get("/login", (req, res) => {
   console.log("로그인 페이지를 출력합니다");
-  res.sendFile(path.join(__dirname, "../../front/html/login.html"));
+  res.sendFile(path.join(__dirname, "../../front/start/login.html"));
 });
 
 router.get("/main", (req, res) => {
   console.log("메인페이지를 출력합니다");
-  res.sendFile(path.join(__dirname, "../../front/html/main.html"));
+  res.sendFile(path.join(__dirname, "../../front/start/main.html"));
 });
 
 router.get("/project/:projectId", (req, res) => {
   console.log("프로젝트 상세보기 페이지를 출력합니다");
-  res.sendFile(path.join(__dirname, "../../front/html/project.detail.html"));
+  res.sendFile(path.join(__dirname, "../../front/project/project.detail.html"));
 });
 
 // router.get("/project/detail/:planId", (req, res) => {
@@ -34,17 +34,17 @@ router.get("/project/:projectId", (req, res) => {
 
 router.get("/project/detail/postPlan/:projectId", (req, res) => {
   console.log("플렌 작성하기 페이지를 출력합니다");
-  res.sendFile(path.join(__dirname, "../../front/html/plan.post.html"));
+  res.sendFile(path.join(__dirname, "../../front/project/plan.post.html"));
 });
 
 router.get("/project/detail/postFile/:projectId", (req, res) => {
   console.log("파일 작성하기 페이지를 출력합니다");
-  res.sendFile(path.join(__dirname, "../../front/html/file.post.html"));
+  res.sendFile(path.join(__dirname, "../../front/project/file.post.html"));
 });
 
 router.get("/project/detail/put/:planId", (req, res) => {
   console.log("플렌 수정하기 페이지를 출력합니다");
-  res.sendFile(path.join(__dirname, "../../front/html/plan.put.html"));
+  res.sendFile(path.join(__dirname, "../../front/project/plan.put.html"));
 });
 
 router.get("/project/file/test", (req, res) => {
