@@ -47,14 +47,9 @@ router.get("/project/detail/put/:planId", (req, res) => {
   res.sendFile(path.join(__dirname, "../../front/project/plan.put.html"));
 });
 
-router.get("/project/file/test", (req, res) => {
-  console.log("사진페이지를 출력합니다.");
-  res.sendFile(path.join(__dirname, "../../front/html/multipart.html"));
-});
-
 router.get("/chat", (req, res) => {
   console.log("채팅페이지를 출력합니다.");
-  res.sendFile(path.join(__dirname, "../../front/html/chat/chat.html"));
+  res.sendFile(path.join(__dirname, "../../front/chat/chat.html"));
 });
 
 module.exports = router;

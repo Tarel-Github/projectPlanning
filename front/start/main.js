@@ -92,16 +92,31 @@ function newProject() {
 
 function chatList() {
   $("#projectList").empty();
-
   let newRoom = ` 
+    채팅기능은 준비중입니다.
     <div style="text-align:center">
     <button type="button" class="btn btn-outline-primary">채팅방 개설</button>
     </div>
     `;
-  console.log(newRoom);
   $("#projectList").append(newRoom);
 }
 
 function otherProjectList() {
   $("#projectList").empty();
+  let otherProjectList = ` 
+    <div style="text-align:center">
+    타인 프로젝트 열람 기능은 준비중입니다.
+    </div>
+  `;
+$("#projectList").append(otherProjectList);
+}
+
+function game() {
+  $("#projectList").empty();
+  let game = ` 
+    <div style="text-align:center">
+    게임기능은 준비중입니다.
+    </div>
+  `;
+  $("#projectList").append(game);
 }
