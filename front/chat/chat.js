@@ -19,6 +19,10 @@ function addMessage(message) {
   chat.appendChild(li);
 }
 
+//내가 메시지를 보낸 경우인가?
+//html의 input내용을 가져오고
+//그것을 소켓 에밋, new_message로 보낸다.
+//보내고 나면 input 내용을 초기화 한다.
 function handleMessageSubmit(event) {
   event.preventDefault();
   const input = chat.querySelector("#msg input"); //html의 msg의 input 내용을 가져옴
