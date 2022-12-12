@@ -34,52 +34,33 @@ app.use(express.static("front")); //front 폴더에 있는 html 파일을 불러
 app.use("/", router); // 라우터 등록, 라우터에 경로별 HTML을 정의해 둔다.
 
 //채팅 관련 코드 시작=================================================
+//채팅 관련 코드 시작=================================================
+//채팅 관련 코드 시작=================================================
 const httpServer = http.createServer(app);
 const server = SocketIO(httpServer);
 
-function publicRooms() {
-  const {
-    sockets: {
-      adapter: { sids, rooms },
-    },
-  } = server;
-  const publicRooms = [];
-  rooms.forEach((_, key) => {
-    if (sids.get(key) === undefined) {
-      publicRooms.push(key);
-    }
-  });
-  return publicRooms;
-}
-
-//소켓 서버 연결
 server.on("connection", (socket) => {
-  socket["nickname"] = "익명";
-  //방입장시 이벤트
-  socket.on("enter_room", (roomName, done) => {
-    socket.join(roomName); //룸 이름에 접속
-    done();
-    socket.to(roomName).emit("welcome", socket.nickname, countRoom(roomName)); //이 메시지를 나를 뺀 모두에게 전달
-    server.sockets.emit("room_change", publicRooms());
+  socket.on("enter_room", (roomName, showRoom) => {
+    console.log(roomName);
+    socket.join(roomName);
+    showRoom(roomName);
+    //welcome이벤트를 roomName에 있는 모든 사람들에게 emit
+    socket.to(roomName).emit("welcome");
   });
-  // //나갈경우 이벤트, 나가기 바로 직전에 발생
-  // socket.on("disconnecting", () => {
-  //   socket.rooms.forEach((room) =>
-  //     socket.to(room).emit("bye", socket.nickname, countRoom(room) - 1)
-  //   );
-  // });
-  // //나갈경우 이벤트
-  // socket.on("disconnect", () => {
-  //   server.sockets.emit("room_change", publicRooms());
-  // });
 
-  // //새로운 메시지
-  // socket.on("new_message", (msg, room, done) => {
-  //   socket.to(room).emit("new_message", `${socket.nickname}:${msg}`);
-  //   done(); //이건 호출되면 프론트에서 코드를 실행할 것이다.
-  // });
-  // socket.on("nickname", (nickname) => (socket["nickname"] = nickname));
-}); //enter_room은 이벤트
+  //누군가 챗방에서 나가면 실행 됌
+  socket.on("disconnecting", () => {
+    //주의사항!!! 버전이 바뀌면서 문법이 바뀌었음!!
+    //socket.rooms.forEach를 Object.keys(socket.rooms).forEach로 변경!!
+    Object.keys(socket.rooms).forEach((room) => socket.to(room).emit("bye"));
+  });
+
+  //done은 프론트에서 실행된다.
+  socket.on("newMessage", (msg, room, done) => {
+    socket.to(room).emit("newMessage", msg);
+    done();
+  });
+});
 
 const handleListen = () => {
   console.log(

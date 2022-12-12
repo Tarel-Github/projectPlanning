@@ -17,63 +17,68 @@
 
   </head>
   <body>
-    <script></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+ -->
 
-    <div class="header" style="width:100%; height:100px;vertical-align:middle;">
+    <header style="width:100%; height:100px;vertical-align:middle;">
+      <div style="font-size: 24px; margin-top: 2%; text-align: center;vertical-align:middle;">
+        채팅 페이지
+      </div>
+    </header>
 
-        <div style="font-size: 24px; margin-top: 2%; text-align: center;vertical-align:middle;">
-            채팅 페이지
-          </div>
-    </div>
+<!--방을 만들지, 방에 참가할지 정하는 공간-->
+    <main>
+      <!-- <div id="buttonDiv" style="text-align: center">
+        <a id="openRoomList"class="btn btn-primary" data-bs-toggle="collapse" href="#roomList" role="button" aria-expanded="false" aria-controls="collapseExample">
+          방 입장
+        </a>
+        <button id="createNewRoom" class="btn btn-primary"  type="button" data-bs-toggle="collapse" data-bs-target="#newRoom" aria-expanded="false" aria-controls="collapseExample">
+          방 만들기
+        </button>
+      </div>  -->
+
+<!--방을 만들기 위한 공간-->
+<!-- 
+      <div id="roomCreateDiv" style="text-align: center; padding: 5px;">
+        <form style="background-color: darkcyan">
+          <input placeholder="방제목 입력" required type="text">
+          <button type="button">방 생성</button>
+        </form>
+      </div> -->
+
+<!--방에 들어가기 위한 공간-->
+
+      <div id="joinRoomDiv" style="text-align: center; padding: 5px;">
+        <form style="background-color: aquamarine;">
+          <ui>방 목록, 해당하는 방이 없을 경우, 방이 자동으로 만들어 집니다.</ui>
+          <h3></h3>
+          <li></li>
+          <input placeholder="방제목 입력" required type="text">
+          <button>참가 또는 생성</button>
+        </form>
+      </div>
+
+
+<!--채팅을 치기 위한 공간-->
+
+      <div id="chatRoomDiv" style="text-align: center; background-color: lightcyan;">
+        <h3></h3>
+        <div style="height: 500px; width: 50%; max-width: 500px;">
+          
+          <li>채팅이 들어갈 공간</li>
+          <ul></ul>
+        </div>
+
+        
+        <form>
+          <input placeholder="메시지" required type="text">
+          <button>보내기</button>
+        </form>
+      </div>
+
+    </main>
+
     
-
-    <div style="text-align: center">
-        <p>
-          <a id="welcome"class="btn btn-primary" data-bs-toggle="collapse" href="#roomList" role="button" aria-expanded="false" aria-controls="collapseExample">
-            방 입장
-          </a>
-          <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#newRoom" aria-expanded="false" aria-controls="collapseExample">
-            방 만들기
-          </button>
-        </p>
-
-        <!--방목록 표시 공간-->
-        <div id="roomList" class="collapse">
-          <div class="card card-body">
-            <form id = "showRoomList">
-              방 목록을 표시합니다.
-            </form>
-          </div>
-        </div>
-
-        <!--채팅내역 표시 공간-->
-          <form id=" msg">
-            <div id = "newPeople"></div>
-            <div id = "chat">
-            채팅내용이 이곳에 표시
-            <div id="ul"></div>
-
-            <input placeholder="채팅입력" type="text">
-            <button type="submit">보내기</button>
-          </form>
-        </div>
-
-        <!--방 생성 공간-->
-        <div class="collapse" id="newRoom">
-          <div class="card card-body">
-            방을 새로 만들 때엔 다음의 규칙을 지켜 주십시오  
-            <form>
-              <input id="roomName"placeholder="방제" type="text">
-              <button id="createRoom"type="submit">방 만들기</button>
-          </form>
-  
-          </div>
-        </div>
-
-
-
-    </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="../chat/chat.js"></script>
