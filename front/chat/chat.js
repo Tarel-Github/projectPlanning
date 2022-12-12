@@ -25,7 +25,7 @@ function addMessage(message){
 //고로 value변수를 새로 추가해 준다.
 function sendMessage(event){
   event.preventDefault()
-  const input = chatRoomDiv.querySelector('input')
+  const input = chatRoomDiv.querySelector('#msg input')
   const value = input.value
   socket.emit("newMessage",input.value, roomName, () => {
     addMessage(`본인: ${value}`)
@@ -33,14 +33,24 @@ function sendMessage(event){
   input.value = ""
 }
 
+//닉네임을 설정하는 함수
+function sendNickname(event){
+  event.preventDefault()
+  const input = chatRoomDiv.querySelector('#name input')
+  socket.emit("nickname",input.value)
+}
+
+
 function showRoom(msg){
   joinRoomDiv.hidden = true
   room.hidden = false
   console.log(`백엔드가 받은 메시지`, msg)
   const h3 = room.querySelector('h3')
   h3.innerText = `방이름: ${roomName}`
-  const form = chatRoomDiv.querySelector('form')
-  form.addEventListener('submit',sendMessage)
+  const msgForm = chatRoomDiv.querySelector('#msg')
+  const nameForm = chatRoomDiv.querySelector('#name')
+  msgForm.addEventListener('submit',sendMessage)
+  nameForm.addEventListener('submit',sendNickname)
 }
 
 function enterRoom(event){
@@ -54,12 +64,12 @@ function enterRoom(event){
 form.addEventListener('submit', enterRoom)
 
 //누군가 들어왔을 때 메시지 생성 함수 실행
-socket.on("welcome", ()=>{
-  addMessage("누군가 들어옴")
+socket.on("welcome", (user)=>{
+  addMessage(`${user} 들어옴`)
 })
 
-socket.on("bye", ()=>{
-  addMessage("누군가 나감!")
+socket.on("bye", (left)=>{
+  addMessage(`${left} 분이 나감!`)
 })
 
 socket.on("newMessage", addMessage )

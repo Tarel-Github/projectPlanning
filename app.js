@@ -40,26 +40,36 @@ const httpServer = http.createServer(app);
 const server = SocketIO(httpServer);
 
 server.on("connection", (socket) => {
+  socket["nickname"] = "익명";
+
+  socket.onAny((event) => {
+    console.log(server.sockets.adapter);
+    console.log(`Socket Event:${evnet}`);
+  });
+
   socket.on("enter_room", (roomName, showRoom) => {
     console.log(roomName);
     socket.join(roomName);
     showRoom(roomName);
     //welcome이벤트를 roomName에 있는 모든 사람들에게 emit
-    socket.to(roomName).emit("welcome");
+    socket.to(roomName).emit("welcome", socket.nickname);
   });
 
   //누군가 챗방에서 나가면 실행 됌
   socket.on("disconnecting", () => {
     //주의사항!!! 버전이 바뀌면서 문법이 바뀌었음!!
     //socket.rooms.forEach를 Object.keys(socket.rooms).forEach로 변경!!
-    Object.keys(socket.rooms).forEach((room) => socket.to(room).emit("bye"));
+    Object.keys(socket.rooms).forEach((room) =>
+      socket.to(room).emit("bye", socket.nickname)
+    );
   });
 
   //done은 프론트에서 실행된다.
   socket.on("newMessage", (msg, room, done) => {
-    socket.to(room).emit("newMessage", msg);
+    socket.to(room).emit("newMessage", `${socket.nickname}: ${msg}`);
     done();
   });
+  socket.on("nickname", (nickname) => (socket["nickname"] = nickname));
 });
 
 const handleListen = () => {
