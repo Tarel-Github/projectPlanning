@@ -39,12 +39,33 @@ app.use("/", router); // 라우터 등록, 라우터에 경로별 HTML을 정의
 const httpServer = http.createServer(app);
 const server = SocketIO(httpServer);
 
+//아답터 기능을 사용하기 위한 부분이다.
+//서버 컴퓨터가 여러대고 각기 다른 컴퓨터로 접속할 경우를 위한 부분
+function publicRooms() {
+  // const sids = server.sockets.adapter.sids;
+  // const rooms = server.sockets.adapter.rooms;
+  // 윗 코드 두 줄은 아래 코드 const~~ = server와 같다.
+  const {
+    sockets: {
+      adapter: { sids, rooms },
+    },
+  } = server;
+  const publicRooms = [];
+  rooms.forEach((_, key) => {
+    if (sids.get(key) === undefined) {
+      publicRooms.push(key);
+    }
+  });
+  return publicRooms;
+}
+
 server.on("connection", (socket) => {
   socket["nickname"] = "익명";
 
   socket.onAny((event) => {
+    //아래 콘솔은 위의 publicRooms함수를 이해하기 위한 용도
     console.log(server.sockets.adapter);
-    console.log(`Socket Event:${evnet}`);
+    console.log(`Socket Event:${event}`);
   });
 
   socket.on("enter_room", (roomName, showRoom) => {
@@ -53,6 +74,8 @@ server.on("connection", (socket) => {
     showRoom(roomName);
     //welcome이벤트를 roomName에 있는 모든 사람들에게 emit
     socket.to(roomName).emit("welcome", socket.nickname);
+    //바로 윗코드는
+    server.sockets.emit("room_change", publicRooms());
   });
 
   //누군가 챗방에서 나가면 실행 됌
@@ -62,6 +85,10 @@ server.on("connection", (socket) => {
     Object.keys(socket.rooms).forEach((room) =>
       socket.to(room).emit("bye", socket.nickname)
     );
+  });
+
+  socket.on("disconnect", () => {
+    server.sockets.emit("room_change", publicRooms());
   });
 
   //done은 프론트에서 실행된다.

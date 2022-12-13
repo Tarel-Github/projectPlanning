@@ -73,3 +73,18 @@ socket.on("bye", (left)=>{
 })
 
 socket.on("newMessage", addMessage )
+
+socket.on("room_change", (rooms)=>{
+  const roomList = joinRoomDiv.querySelector("ul")
+  roomList.innerHTML = "";
+  if(rooms.length===0){
+    roomList.innerHTML = "";
+    return;
+  }
+  rooms.forEach(room =>{
+    const li = document.createElement("li")
+    li.innerText = room;
+    roomList.append(li)
+
+  })
+})
