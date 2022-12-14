@@ -59,6 +59,11 @@ function publicRooms() {
   return publicRooms;
 }
 
+//방안에 몇명이나 있는지 세주는 함수
+function countUser(roomName) {
+  return server.sockets.adapter.rooms.get(roomName)?.size;
+}
+
 server.on("connection", (socket) => {
   socket["nickname"] = "익명";
 
@@ -69,12 +74,11 @@ server.on("connection", (socket) => {
   });
 
   socket.on("enter_room", (roomName, showRoom) => {
-    console.log(roomName);
-    socket.join(roomName);
+    // console.log(roomName);
+    // socket.join(roomName);
     showRoom(roomName);
     //welcome이벤트를 roomName에 있는 모든 사람들에게 emit
-    socket.to(roomName).emit("welcome", socket.nickname);
-    //바로 윗코드는
+    socket.to(roomName).emit("welcome", socket.nicknam, countUser(roomName));
     server.sockets.emit("room_change", publicRooms());
   });
 
@@ -83,7 +87,7 @@ server.on("connection", (socket) => {
     //주의사항!!! 버전이 바뀌면서 문법이 바뀌었음!!
     //socket.rooms.forEach를 Object.keys(socket.rooms).forEach로 변경!!
     Object.keys(socket.rooms).forEach((room) =>
-      socket.to(room).emit("bye", socket.nickname)
+      socket.to(room).emit("bye", socket.nickname, countUser(roomName) - 1)
     );
   });
 

@@ -64,11 +64,15 @@ function enterRoom(event){
 form.addEventListener('submit', enterRoom)
 
 //누군가 들어왔을 때 메시지 생성 함수 실행
-socket.on("welcome", (user)=>{
+socket.on("welcome", (user, countUser)=>{
+  const h3 = room.querySelector('h3')
+  h3.innerText = `방이름: ${roomName} (${countUser})`
   addMessage(`${user} 들어옴`)
 })
 
-socket.on("bye", (left)=>{
+socket.on("bye", (left, countUser)=>{
+  const h3 = room.querySelector('h3')
+  h3.innerText = `방이름: ${roomName} (${countUser})`
   addMessage(`${left} 분이 나감!`)
 })
 
