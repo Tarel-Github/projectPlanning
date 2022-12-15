@@ -67,9 +67,7 @@ function myProjectList() {
 }
 
 function newProject() {
-  console.log("New 실행??");
   let title = $("#postProjectTitle").val();
-  console.log(title);
   $.ajax({
     type: "POST",
     url: "/project/post",
@@ -95,7 +93,7 @@ function chatList() {
   let newRoom = ` 
     채팅기능은 준비중입니다.
     <div style="text-align:center">
-    <button type="button" class="btn btn-outline-primary">채팅방 개설</button>
+    <button type="button" class="btn btn-outline-primary" >채팅방 입장</button>
     </div>
     `;
   $("#projectList").append(newRoom);
@@ -111,7 +109,7 @@ function otherProjectList() {
 $("#projectList").append(otherProjectList);
 }
 
-function game() {
+function gameList() {
   $("#projectList").empty();
   let game = ` 
     <div style="text-align:center">

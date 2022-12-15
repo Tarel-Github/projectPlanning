@@ -7,7 +7,7 @@ const multer = require("multer"); //멀터
 const http = require("http");
 const fs = require("fs"); //멀터
 const logger = require("./logger"); //콘솔로그 대체품 logger.info(), logger.error() 형태로 사용
-const SocketIO = require("socket.io");
+//const SocketIO = require("socket.io");
 
 //이미지 업로드 기능 시작=====================
 
@@ -36,81 +36,98 @@ app.use("/", router); // 라우터 등록, 라우터에 경로별 HTML을 정의
 //채팅 관련 코드 시작=================================================
 //채팅 관련 코드 시작=================================================
 //채팅 관련 코드 시작=================================================
+
 const httpServer = http.createServer(app);
-const server = SocketIO(httpServer);
+//const server = SocketIO(httpServer);
 
-//아답터 기능을 사용하기 위한 부분이다.
-//서버 컴퓨터가 여러대고 각기 다른 컴퓨터로 접속할 경우를 위한 부분
-function publicRooms() {
-  // const sids = server.sockets.adapter.sids;
-  // const rooms = server.sockets.adapter.rooms;
-  // 윗 코드 두 줄은 아래 코드 const~~ = server와 같다.
-  const {
-    sockets: {
-      adapter: { sids, rooms },
-    },
-  } = server;
-  const publicRooms = [];
-  rooms.forEach((_, key) => {
-    if (sids.get(key) === undefined) {
-      publicRooms.push(key);
-    }
-  });
-  return publicRooms;
-}
-
-//방안에 몇명이나 있는지 세주는 함수
-function countUser(roomName) {
-  return server.sockets.adapter.rooms.get(roomName)?.size;
-}
-
-server.on("connection", (socket) => {
-  socket["nickname"] = "익명";
-
-  socket.onAny((event) => {
-    //아래 콘솔은 위의 publicRooms함수를 이해하기 위한 용도
-    console.log(server.sockets.adapter);
-    console.log(`Socket Event:${event}`);
-  });
-
-  socket.on("enter_room", (roomName, showRoom) => {
-    // console.log(roomName);
-    // socket.join(roomName);
-    showRoom(roomName);
-    //welcome이벤트를 roomName에 있는 모든 사람들에게 emit
-    socket.to(roomName).emit("welcome", socket.nicknam, countUser(roomName));
-    server.sockets.emit("room_change", publicRooms());
-  });
-
-  //누군가 챗방에서 나가면 실행 됌
-  socket.on("disconnecting", () => {
-    //주의사항!!! 버전이 바뀌면서 문법이 바뀌었음!!
-    //socket.rooms.forEach를 Object.keys(socket.rooms).forEach로 변경!!
-    Object.keys(socket.rooms).forEach((room) =>
-      socket.to(room).emit("bye", socket.nickname, countUser(roomName) - 1)
-    );
-  });
-
-  socket.on("disconnect", () => {
-    server.sockets.emit("room_change", publicRooms());
-  });
-
-  //done은 프론트에서 실행된다.
-  socket.on("newMessage", (msg, room, done) => {
-    socket.to(room).emit("newMessage", `${socket.nickname}: ${msg}`);
-    done();
-  });
-  socket.on("nickname", (nickname) => (socket["nickname"] = nickname));
-});
-
-const handleListen = () => {
+//이 아랫코드는 임으로 추가된 부분===============================
+const socket = require("./socket");
+let server;
+server = http.createServer(app);
+server.listen(process.env.PORT, () => {
   console.log(
     "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━서버 가동 시작━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
   );
-  console.log("4000번 서버를 가동합니다.");
-};
+  console.log(process.env.PORT + "번 서버를 가동합니다.");
+  socket(server);
+});
 
-httpServer.listen(4000, handleListen);
+//이 윗 코드는 임으로 추가된 부분================================================
+
+//아답터 기능을 사용하기 위한 부분이다.
+//서버 컴퓨터가 여러대고 각기 다른 컴퓨터로 접속할 경우를 위한 부분
+// function publicRooms() {
+//   // const sids = server.sockets.adapter.sids;
+//   // const rooms = server.sockets.adapter.rooms;
+//   // 윗 코드 두 줄은 아래 코드 const~~ = server와 같다.
+//   const {
+//     sockets: {
+//       adapter: { sids, rooms },
+//     },
+//   } = server;
+//   const publicRooms = [];
+//   rooms.forEach((_, key) => {
+//     if (sids.get(key) === undefined) {
+//       publicRooms.push(key);
+//     }
+//   });
+//   return publicRooms;
+// }
+
+// //방안에 몇명이나 있는지 세주는 함수
+// function countUser(roomName) {
+//   return server.sockets.adapter.rooms.get(roomName)?.size;
+// }
+
+// server.on("connection", (socket) => {
+//   socket["nickname"] = "익명";
+
+//   socket.onAny((event) => {
+//     //아래 콘솔은 위의 publicRooms함수를 이해하기 위한 용도
+//     console.log(server.sockets.adapter);
+//     console.log(`Socket Event:${event}`);
+//   });
+
+//   socket.on("enter_room", (roomName, showRoom) => {
+//     // console.log(roomName);
+//     // socket.join(roomName);
+//     showRoom(roomName);
+//     //welcome이벤트를 roomName에 있는 모든 사람들에게 emit
+//     socket.to(roomName).emit("welcome", socket.nickname, countUser(roomName));
+//     server.sockets.emit("room_change", publicRooms());
+//   });
+
+//   //누군가 챗방에서 나가면 실행 됌
+//   socket.on("disconnecting", () => {
+//     //주의사항!!! 버전이 바뀌면서 문법이 바뀌었음!!
+//     //socket.rooms.forEach를 Object.keys(socket.rooms).forEach로 변경!!
+//     Object.keys(socket.rooms).forEach((room) =>
+//       socket.to(room).emit("bye", socket.nickname, countUser(roomName) - 1)
+//     );
+//   });
+
+//   socket.on("disconnect", () => {
+//     server.sockets.emit("room_change", publicRooms());
+//   });
+
+//   //done은 프론트에서 실행된다.
+//   socket.on("newMessage", (msg, room, done) => {
+//     socket.to(room).emit("newMessage", `${socket.nickname}: ${msg}`);
+//     done();
+//   });
+//   socket.on("nickname", (nickname) => (socket["nickname"] = nickname));
+// });
+
+//채팅 관련 코드 종료=================================================
+
+// const handleListen = () => {
+//   console.log(
+//     "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━서버 가동 시작━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+//   );
+//   console.log(process.env.PORT + "번 서버를 가동합니다.");
+// };
+
+// httpServer.listen(4000, handleListen);
 
 // app.listen(process.env.PORT, () => {
 //   console.log(

@@ -1,83 +1,61 @@
-//app.js는 frontend를 담당한다. frontend와 backend 폴더를 분리함으로써 보안을 강화한다.
-//server.js는 backend를 담당한다.
-
-const express = require("express");
-const http = require("http"); //http 방식
 const SocketIO = require("socket.io");
-//const {Server} = require("socket.io");
-//const {instrument} = require("@socket.io/admin-ui");
-const app = express();
-
-//html 대신 pug를 통해서 사이트를 표현
-app.set("view engine", "pug");
-
-//pug들이 있는 경로를 설정
-app.set("views", __dirname + "/views");
-app.use("/public", express.static(__dirname + "/public"));
-
-const htpServer = http.createServer(app); //http 서버
-const wsServer = SocketIO(httpServer);
-
-function publicRooms() {
-  const {
-    sockets: {
-      adapter: { sids, rooms },
-    },
-  } = wsServer;
-  // 위 코드는 아래 두 줄과도 같다.
-  // const sids = wsServer.socket.adapter.sids;
-  // const rooms = wsServer.socket.adapter.rooms;
-  const publicRooms = [];
-  rooms.forEach((_, key) => {
-    if (sids.get(key) === undefined) {
-      publicRooms.push(key);
-    }
-  });
-  return publicRooms;
+class SocketIoChat {
+  // //아답터 기능을 사용하기 위한 부분이다.
+  // //서버 컴퓨터가 여러대고 각기 다른 컴퓨터로 접속할 경우를 위한 부분
+  // function publicRooms() {
+  //   // const sids = server.sockets.adapter.sids;
+  //   // const rooms = server.sockets.adapter.rooms;
+  //   // 윗 코드 두 줄은 아래 코드 const~~ = server와 같다.
+  //   const {
+  //     sockets: {
+  //       adapter: { sids, rooms },
+  //     },
+  //   } = server;
+  //   const publicRooms = [];
+  //   rooms.forEach((_, key) => {
+  //     if (sids.get(key) === undefined) {
+  //       publicRooms.push(key);
+  //     }
+  //   });
+  //   return publicRooms;
+  // }
+  // //방안에 몇명이나 있는지 세주는 함수
+  // function countUser(roomName) {
+  //   return server.sockets.adapter.rooms.get(roomName)?.size;
+  // }
+  // server.on("connection", (socket) => {
+  //   socket["nickname"] = "익명";
+  //   socket.onAny((event) => {
+  //     //아래 콘솔은 위의 publicRooms함수를 이해하기 위한 용도
+  //     console.log(server.sockets.adapter);
+  //     console.log(`Socket Event:${event}`);
+  //   });
+  //   socket.on("enter_room", (roomName, showRoom) => {
+  //     // console.log(roomName);
+  //     // socket.join(roomName);
+  //     showRoom(roomName);
+  //     //welcome이벤트를 roomName에 있는 모든 사람들에게 emit
+  //     socket.to(roomName).emit("welcome", socket.nicknam, countUser(roomName));
+  //     server.sockets.emit("room_change", publicRooms());
+  //   });
+  //   //누군가 챗방에서 나가면 실행 됌
+  //   socket.on("disconnecting", () => {
+  //     //주의사항!!! 버전이 바뀌면서 문법이 바뀌었음!!
+  //     //socket.rooms.forEach를 Object.keys(socket.rooms).forEach로 변경!!
+  //     Object.keys(socket.rooms).forEach((room) =>
+  //       socket.to(room).emit("bye", socket.nickname, countUser(roomName) - 1)
+  //     );
+  //   });
+  //   socket.on("disconnect", () => {
+  //     server.sockets.emit("room_change", publicRooms());
+  //   });
+  //   //done은 프론트에서 실행된다.
+  //   socket.on("newMessage", (msg, room, done) => {
+  //     socket.to(room).emit("newMessage", `${socket.nickname}: ${msg}`);
+  //     done();
+  //   });
+  //   socket.on("nickname", (nickname) => (socket["nickname"] = nickname));
+  // });
 }
 
-function countRoom(roomName) {
-  return wsServer.sockets.adapter.rooms.get(roomName)?.size;
-}
-
-wsServer.on("connection", (socket) => {
-  socket["nickname"] = "익명";
-  socket.onAny((event) => {
-    console.log(`Socket Event: ${event}`);
-  });
-  socket.on("enter_room", (roomName, done) => {
-    socket.join(roomName); //룸 이름에 접속
-    done();
-    socket.to(roomName).emit("welcome", socket.nickname, countRoom(roomName)); //이 메시지를 나를 뺀 모두에게 전달
-    wsServer.sockets.emit("room_change", publicRooms());
-  });
-  // setTimeout(() => {
-  //   done("백엔드: 메시지를 보냅니다");
-  // }, 10000); //10초후, 이 메시지를 전달
-  socket.on("disconnecting", () => {
-    //disconnecting은 연결이 끊어지기 직전에 실행
-    socket.rooms.forEach((room) =>
-      socket.to(room).emit("bye", socket.nickname, countRoom(room) - 1)
-    );
-  });
-  socket.on("disconnect", () => {
-    wsServer.sockets.emit("room_change", publicRooms());
-  });
-  socket.on("new_message", (msg, room, done) => {
-    socket.to(room).emit("new_message", `${socket.nickname}:${msg}`);
-    done(); //이건 호출되면 프론트에서 코드를 실행할 것이다.
-  });
-  socket.on("nickname", (nickname) => (socket["nickname"] = nickname));
-}); //enter_room은 이벤트
-
-const handleListen = () =>
-  console.log(`━━━━Listening on http://localhost:3750`); //아래 내용 덕분에 ws://localhost:3750도 구동 된다.
-
-function handleConnection(socket) {
-  console.log(socket);
-}
-
-const sockets = []; //철자 다름
-
-//app.listen(3750, handleListen);
-httpServer.listen(3750, handleListen); //http 서버위에 ws서버도 담겼다.
+module.exports = SocketIoChat;

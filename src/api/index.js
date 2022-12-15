@@ -25,8 +25,8 @@ const imageFile = new ImageFile();
 router.get("/imgs/:name", imageFile.imageFile);
 
 //여기서부터 채팅==============================================================
-//const chat = require("./chat/chat");
-//router.use("/", chat);
+// const chat = require("./chat/chat");
+// router.use("/", chat);
 
 //끝==================================================================
 module.exports = router;
