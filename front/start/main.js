@@ -88,16 +88,26 @@ function newProject() {
   });
 }
 
+//채팅기능======================================================================================
 function chatList() {
+
+
+
   $("#projectList").empty();
   let newRoom = ` 
     채팅기능은 준비중입니다.
+
+    <link href="../chat/chat.html" rel="stylesheet" />
+    <!--채팅 코드 경로-->
+
+
     <div style="text-align:center">
     <button type="button" class="btn btn-outline-primary" >채팅방 입장</button>
     </div>
     `;
   $("#projectList").append(newRoom);
 }
+//채팅기능======================================================================================
 
 function otherProjectList() {
   $("#projectList").empty();
