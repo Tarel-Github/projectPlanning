@@ -22,10 +22,10 @@ class UserService {
     //액세스 토큰 발급
     const accessToken = jwt.sign(
       { identifier: user[0].identifier, userId: user[0].userId },
-      process.env.SECRET_KEY
-      // {
-      //   expiresIn: "100s",
-      // }
+      process.env.SECRET_KEY,
+      {
+        expiresIn: "1h",
+      }
     );
     //리프레시 토큰 발급, 지속시간 따로 설정할 것
     const refreshToken = jwt.sign({}, process.env.SECRET_KEY, {

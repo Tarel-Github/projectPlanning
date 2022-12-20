@@ -95,11 +95,8 @@ function chatList() {
 
   $("#projectList").empty();
   let newRoom = ` 
-    채팅기능은 준비중입니다.
-
     <link href="../chat/chat.html" rel="stylesheet" />
     <!--채팅 코드 경로-->
-
 
     <div style="text-align:center">
     <button type="button" class="btn btn-outline-primary" onclick="enterChat()" >채팅방 입장</button>

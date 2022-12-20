@@ -6,13 +6,18 @@ require("dotenv").config(); //환경변수 쓸 일이 없다면 이부분 지울
 
 module.exports = async (req, res, next) => {
   try {
+    console.log("00000000");
     const { authorization, refreshtoken } = req.headers;
+    console.log(authorization);
     // console.log("어쓰 미들웨어의 공간========="); ///################
     // console.log(authorization); //Bearer 토큰이름 형태로 나옴
     // console.log("어쓰 미들웨어++++++++"); ///################
     // console.log(refreshtoken); //왜 리프레시 토큰은 언디파인드 일까?? 레디스에 저장하지 않아서??
     const tokenType = authorization.split(" ")[0];
+    console.log("111111");
     const accessToken = authorization.split(" ")[1];
+
+    console.log("11111111");
 
     // console.log("중간보고"); ///################
 
@@ -21,7 +26,7 @@ module.exports = async (req, res, next) => {
     // console.log("토큰 타입======================"); ///################
     // console.log(tokenType); ///################
     // console.log("토큰 타입끝++++++++++++++"); ///################
-
+    console.log("111222222");
     //토큰 타입이 Bearer가 아닐경우 에러
     if (tokenType !== "Bearer")
       return res.status(400).json({ message: "잘못된 요청입니다." });
@@ -35,7 +40,7 @@ module.exports = async (req, res, next) => {
         return false;
       }
     }
-
+    console.log("11333333");
     /**RefreshToken검증 함수 선언 */
     const validateRefreshToken = async (refreshToken) => {
       try {
@@ -61,16 +66,16 @@ module.exports = async (req, res, next) => {
     if (refreshToken && !isRefreshTokenValidate) {
       return res.status(419).json({ message: "다시 로그인 해주세요" });
     }
-
+    console.log("4444");
     /**refreshToken유효 accesstoken 재발급*/
     if (refreshToken && accessToken && isRefreshTokenValidate) {
       const decoded = jwt.decode(accessToken);
       const newAccessToken = jwt.sign(
         { identifier: decoded.identifier, userId: decoded.userId },
-        process.env.SECRET_KEY
-        // {
-        //   expiresIn: "60s",
-        // }
+        process.env.SECRET_KEY,
+        {
+          expiresIn: "1h",
+        }
       );
       return res.status(200).json({ message: "재발급", Token: newAccessToken });
     }

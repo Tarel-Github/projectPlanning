@@ -11,6 +11,17 @@ room.hidden = true
 
 let roomName;
 
+//시작하자마자 실행되는 함수
+$(document).ready(function () {
+  console.log(socket)
+  console.log(socket.request)
+  test();
+});
+
+
+let test = async (req, res, next) => console.log(res)
+
+
 function backToMain(){
   window.location.replace("/main");
 }

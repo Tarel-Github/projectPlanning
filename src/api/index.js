@@ -7,12 +7,16 @@ const plan = require("./plan/plan.route");
 const project = require("./project/project.route");
 const todo = require("./todo/todo.route");
 const file = require("./file/file.route");
+const chat = require("./chat/chat.route");
+const test = require("./test/test.route");
 
-router.use("/user", user);
-router.use("/plan", plan);
-router.use("/project", project);
-router.use("/todo", todo);
-router.use("/file", file);
+router.use("/", user);
+router.use("/", plan);
+router.use("/", project);
+router.use("/", todo);
+router.use("/", file);
+router.use("/", chat);
+router.use("/", test);
 
 //프론트 엔드 HTML 파일 불러오는 부분=======================================================
 const front = require("./front");

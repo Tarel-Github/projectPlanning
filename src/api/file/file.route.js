@@ -29,12 +29,17 @@ const up = multer({
 //경로(/file)
 //모든 파일 열람, 파일 업로드, 파일 수정, 파일 삭제
 //router.post("/test", auth, upload.single("name"), fileCon.uploadFile);
-router.post("/post/:projectId", auth, up.single("name"), fileCon.uploadFile);
+router.post(
+  "/file/post/:projectId",
+  auth,
+  up.single("name"),
+  fileCon.uploadFile
+);
 
-router.get("/get/:projectId", auth, fileCon.getFile);
+router.get("/file/get/:projectId", auth, fileCon.getFile);
 
 // router.post("/post/:projectId", auth, fileCon.postFile);
-router.put("/put/:planId", auth, fileCon.putFile);
-router.delete("/delete/:planId", auth, fileCon.deleteFile);
+router.put("/file/put/:planId", auth, fileCon.putFile);
+router.delete("/file/delete/:planId", auth, fileCon.deleteFile);
 
 module.exports = router;

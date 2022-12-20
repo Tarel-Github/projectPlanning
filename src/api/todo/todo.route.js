@@ -7,11 +7,11 @@ const todoController = new TodoController();
 const auth = require("../../middleware/authMiddleware");
 
 //경로(/todo)
-router.get("/get/:projectId", auth, todoController.getTodo);
-router.post("/post/:projectId", auth, todoController.postTodo);
-router.put("/put/edit/:todoId", auth, todoController.putTodo);
-router.put("/put/check/:todoId", auth, todoController.checkTodo);
-router.delete("/delete/:todoId", auth, todoController.deleteTodo);
+router.get("/todo/get/:projectId", auth, todoController.getTodo);
+router.post("/todo/post/:projectId", auth, todoController.postTodo);
+router.put("/todo/put/edit/:todoId", auth, todoController.putTodo);
+router.put("/todo/put/check/:todoId", auth, todoController.checkTodo);
+router.delete("/todo/delete/:todoId", auth, todoController.deleteTodo);
 
 module.exports = router;
 

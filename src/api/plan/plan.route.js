@@ -7,10 +7,10 @@ const planController = new PlanController();
 const auth = require("../../middleware/authMiddleware");
 
 //경로(/plan)
-router.get("/get/:projectId", auth, planController.getPlan);
-router.post("/post/:projectId", auth, planController.postPlan);
-router.put("/put/:planId", auth, planController.putPlan);
-router.delete("/delete/:planId", auth, planController.deletePlan);
+router.get("/plan/get/:projectId", auth, planController.getPlan);
+router.post("/plan/post/:projectId", auth, planController.postPlan);
+router.put("/plan/put/:planId", auth, planController.putPlan);
+router.delete("/plan/delete/:planId", auth, planController.deletePlan);
 
 module.exports = router;
 

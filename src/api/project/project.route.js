@@ -7,11 +7,15 @@ const projectController = new ProjectController();
 const auth = require("../../middleware/authMiddleware");
 
 //경로(/project) 프로젝트는 아직 미완성
-router.get("/get", auth, projectController.getProjectAll);
-router.get("/get/:projectId", auth, projectController.getProjectDetail);
-router.post("/post", auth, projectController.postProject);
-router.put("/put/:projectId", auth, projectController.putProject);
-router.delete("/delete/:projectId", auth, projectController.deleteProject);
+router.get("/project/get", auth, projectController.getProjectAll);
+router.get("/project/get/:projectId", auth, projectController.getProjectDetail);
+router.post("/project/post", auth, projectController.postProject);
+router.put("/project/put/:projectId", auth, projectController.putProject);
+router.delete(
+  "/project/delete/:projectId",
+  auth,
+  projectController.deleteProject
+);
 
 module.exports = router;
 
