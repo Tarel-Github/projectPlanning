@@ -11,6 +11,11 @@ room.hidden = true
 
 let roomName;
 
+function backToMain(){
+  window.location.replace("/main");
+}
+
+
 //누군가 들어오면 들어왔다고 메시지 추가
 function addMessage(message){
   const ul = chatRoomDiv.querySelector("ul")

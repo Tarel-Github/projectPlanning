@@ -102,12 +102,16 @@ function chatList() {
 
 
     <div style="text-align:center">
-    <button type="button" class="btn btn-outline-primary" >채팅방 입장</button>
+    <button type="button" class="btn btn-outline-primary" onclick="enterChat()" >채팅방 입장</button>
     </div>
     `;
   $("#projectList").append(newRoom);
 }
 //채팅기능======================================================================================
+function enterChat() {
+  window.location.replace("/chat");
+}
+
 
 function otherProjectList() {
   $("#projectList").empty();
