@@ -7,14 +7,10 @@ class ChatController {
     try {
       const { userId } = res.locals.user;
       const name = await this.chatService.getName(userId);
-
-      console.log("======================================");
-      console.log("=============이거 뭔가================");
-      console.log("======================================");
-      console.log("======================================");
-
-      console.log(userId);
-    } catch (err) {}
+      return res.status(200).json({ msg: "닉네임", data: name });
+    } catch (err) {
+      return res.status(400).json({ msg: "닉네임가져오기 실패" });
+    }
   };
 
   //   // 메시지 보내기
