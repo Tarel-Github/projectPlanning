@@ -24,19 +24,36 @@ let start = false
 
 //게임 시작
 function startGame(){
-    start = true;
-    getBlockStart()
+    try{
+        if (start) return
+        start = true;
+        getBlockStart()
+        startControllBlock()
 
-    play = setInterval(function() {
-        if(blockList.length < 5){
-            blockList.push(Math.floor(Math.random()*(max-min) + min)) 
-            //getBlock(Math.floor(Math.random()*(max-min) + min));
-        }
-        console.log(blockList)
-        console.log("타이머 함수")
-    }, 1000);
+        play = setInterval(function() {
+            if(blockList.length < 5){
+                blockList.push(Math.floor(Math.random()*(max-min) + min)) 
+                //getBlock(Math.floor(Math.random()*(max-min) + min));
+            }
+            console.log(blockList)
+            console.log("타이머 함수")
+        }, 1000);
+    }catch(e){
+        
+    }
      
 }
+
+function startControllBlock(){
+    let block = blockList[0]
+    blockList.shift()
+    blockList.push(Math.floor(Math.random()*(max-min) + min)) 
+    console.log(blockList)
+    console.log(block)
+
+}
+
+
 
 //키입력, 스페이스바, 아래로 내리는 명령
 window.onkeydown = (space) => {
