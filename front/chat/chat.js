@@ -10,6 +10,7 @@ const room = document.getElementById("chatRoomDiv");
 room.hidden = true;
 
 let roomName;
+let myname;
 
 //시작하자마자 실행되는 함수
 $(document).ready(function () {
@@ -23,8 +24,6 @@ $(document).ready(function () {
 //let test = async (req, res, next) => console.log(res)
 
 function getMyName() {
-  console.log("겟 마이 네임 실행");
-  console.log(localStorage.getItem("token"));
   $.ajax({
     type: "GET",
     url: "/main/chatName",
@@ -34,13 +33,11 @@ function getMyName() {
     },
     data: {},
     success: function (response) {
-      console.log("겟 마이 네임 성공");
-      console.log(response);
-      alert(response["data"] + "님 환영합니다.");
-      console.log(localStorage.getItem("token"));
+      //alert(response["data"] + "님 환영합니다.");
+      myname = response["data"]
+      sendNickname(event)
     },
     error: function (error) {
-      console.log("겟 마이 네임 실패");
       alert(error);
     },
   });
@@ -55,7 +52,18 @@ function addMessage(message) {
   const ul = chatRoomDiv.querySelector("ul");
   const li = document.createElement("li");
   li.innerText = message;
-  ul.appendChild(li);
+  console.log(message)
+  console.log(message.split(":")[0])
+  if(message.split(":")[0]==="본인"){
+    const mymsg = `<li style="text-align:right; background-color: white;">${message.split(":")[1]}</li>`
+    $("#chatSpace").append(mymsg);
+    //ul.appendChild(mymsg)
+  }else{
+    const msg = `<li style="text-align:left">${message}</li>`
+    $("#chatSpace").append(msg);
+    //ul.appendChild(li);
+  }
+
 }
 
 //새로운 메시지를 보낸다.
@@ -75,10 +83,12 @@ function sendMessage(event) {
 //닉네임을 설정하는 함수
 function sendNickname(event) {
   event.preventDefault();
-  const input = chatRoomDiv.querySelector("#name input");
-  socket.emit("nickname", input.value);
+  // const input = chatRoomDiv.querySelector("#name input");
+  // socket.emit("nickname", input.value);
+  socket.emit("nickname", myname);
 }
 
+//방 안에서 실행되는 함수 중 하나
 function showRoom(msg) {
   joinRoomDiv.hidden = true;
   room.hidden = false;

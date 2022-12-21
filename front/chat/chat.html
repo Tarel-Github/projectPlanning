@@ -36,11 +36,10 @@
 <!--방을 만들지, 방에 참가할지 정하는 공간-->
     <main>
 
-      <div id="joinRoomDiv" style="text-align: center; padding: 5px;">
-        <form style="background-color: aquamarine;">
+      <div id="joinRoomDiv" style="text-align: center; padding: 5px; background-color: aquamarine;">
+        <form style="background-color: aquamarine; width: 50%; max-width: 500px; display:inline-block;">
           <ui>방 목록, 해당하는 방이 없을 경우, 방이 자동으로 만들어 집니다.</ui>
-          <h3></h3>
-          <li></li>
+
           <h4>열려있는 방 목록</h4>
           <ul></ul>
           <input placeholder="방제목 입력" required type="text">
@@ -55,17 +54,17 @@
 
       <div id="chatRoomDiv" style="text-align: center; background-color: lightcyan;">
         <h3></h3>
-        <div style="height: 500px; width: 50%; max-width: 500px;">
+        <div style="height: 500px; width: 50%; max-width: 500px;margin: auto;">
           
-          <li>채팅이 들어갈 공간</li>
-          <ul></ul>
+          <li style="text-align:left">채팅이 들어갈 공간</li>
+          <ul id="chatSpace" class="chatSpace"style="text-align:left"></ul>
         </div>
 
-
+<!-- 
         <form id="name">
           <input placeholder="닉네임" required type="text">
           <button>저장</button>
-        </form>
+        </form> -->
         
         <form id="msg">
           <input placeholder="메시지" required type="text">
