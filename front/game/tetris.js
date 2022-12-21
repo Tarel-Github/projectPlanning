@@ -19,19 +19,15 @@ function grid() {
 let blockList =[]
 const min = 0;
 const max = 7;
+//게임시작 여부
+let start = false
 
-
+//게임 시작
 function startGame(){
-
+    start = true;
     getBlockStart()
 
-    if(blockList.length < 5){
-        // blockList.push(Math.floor(Math.random()*(max-min) + min)) 
-        //getBlock(Math.floor(Math.random()*(max-min) + min));
-    }
-
     play = setInterval(function() {
-        
         if(blockList.length < 5){
             blockList.push(Math.floor(Math.random()*(max-min) + min)) 
             //getBlock(Math.floor(Math.random()*(max-min) + min));
@@ -42,6 +38,38 @@ function startGame(){
      
 }
 
+//키입력, 스페이스바, 아래로 내리는 명령
+window.onkeydown = (space) => {
+    if(!start) return;
+
+    console.log(space);
+}
+//키입력, 방향키 명령
+window.onkeydown = (ArrowLeft) => {
+    if(!start) return;
+
+    console.log(ArrowLeft);
+}
+window.onkeydown = (ArrowRight) => {
+    if(!start) return;
+
+    console.log(ArrowRight);
+}
+window.onkeydown = (ArrowDown) => {
+    if(!start) return;
+
+    console.log(ArrowDown);
+}
+//방향키 상단은 회전 명령
+window.onkeydown = (ArrowUp) => {
+    if(!start) return;
+
+    console.log(ArrowUp);
+}
+
+
+
+//게임을 처음 시작했을 때, 블록 리스트를 생성
 function getBlockStart(){
     for(let i=0; i<5; i++){
         blockList.push(Math.floor(Math.random()*(max-min) + min)) 
