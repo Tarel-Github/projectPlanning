@@ -118,7 +118,8 @@ function gameList() {
   $("#projectList").empty();
   let game = ` 
     <div style="text-align:center">
-    게임기능은 준비중입니다.
+    게임기능은 준비중입니다.</br>
+    <button type="button" class="btn btn-outline-primary" onclick="location.href='/game/001'" value ="page move">게임 시작</button>
     </div>
   `;
   $("#projectList").append(game);
