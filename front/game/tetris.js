@@ -17,15 +17,36 @@ function grid() {
 }
 
 let blockList =[]
+const min = 0;
+const max = 7;
+
 
 function startGame(){
-    const min = 0;
-    const max = 7;
+
+    getBlockStart()
 
     if(blockList.length < 5){
-        getBlock(Math.floor(Math.random()*(max-min) + min));
+        // blockList.push(Math.floor(Math.random()*(max-min) + min)) 
+        //getBlock(Math.floor(Math.random()*(max-min) + min));
     }
-} 
+
+    play = setInterval(function() {
+        
+        if(blockList.length < 5){
+            blockList.push(Math.floor(Math.random()*(max-min) + min)) 
+            //getBlock(Math.floor(Math.random()*(max-min) + min));
+        }
+        console.log(blockList)
+        console.log("타이머 함수")
+    }, 1000);
+     
+}
+
+function getBlockStart(){
+    for(let i=0; i<5; i++){
+        blockList.push(Math.floor(Math.random()*(max-min) + min)) 
+    }
+}
   
 function getBlock(n){
     console.log("-------------------------------")
