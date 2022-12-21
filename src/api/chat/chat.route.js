@@ -6,7 +6,7 @@ const chatController = new ChatController();
 
 const auth = require("../../middleware/authMiddleware");
 
-router.get("/asdfchat", auth, chatController.get);
+router.get("/main/chatName", auth, chatController.getName);
 
 // //메시지 가져오기
 // router.get("/chat/getChat", auth, chatController.getChat);

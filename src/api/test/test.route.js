@@ -6,6 +6,6 @@ const testController = new TestController();
 
 const auth = require("../../middleware/authMiddleware");
 
-router.get("/test", auth, testController.get);
+router.get("/test/get", auth, testController.getTest);
 
 module.exports = router;

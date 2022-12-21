@@ -52,11 +52,6 @@ router.get("/chat", (req, res) => {
   res.sendFile(path.join(__dirname, "../../front/chat/chat.html"));
 });
 
-router.get("/chat2", (req, res) => {
-  console.log("채팅페이지2를 출력합니다.");
-  res.sendFile(path.join(__dirname, "../../front/chat/chat_2.html"));
-});
-
 router.get("/test", (req, res) => {
   console.log("테스트를 출력합니다.");
   res.sendFile(path.join(__dirname, "../../front/chat/test.html"));

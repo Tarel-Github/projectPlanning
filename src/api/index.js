@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 
+//주의사항! 백과 프론트가 같은 URL 경로를 사용해선 안 된다.
+
 const user = require("./user/user.route");
 const plan = require("./plan/plan.route");
 const project = require("./project/project.route");

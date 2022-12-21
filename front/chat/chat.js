@@ -13,13 +13,40 @@ let roomName;
 
 //시작하자마자 실행되는 함수
 $(document).ready(function () {
+  console.log("이건 실행 되었나???")
   console.log(socket)
   console.log(socket.request)
-  test();
+  //test();
+  getMyName();
 });
 
 
-let test = async (req, res, next) => console.log(res)
+//let test = async (req, res, next) => console.log(res)
+
+function getMyName() {
+  console.log("겟 마이 네임 실행")
+  console.log(localStorage.getItem("token"))
+  $.ajax({
+    type: "GET",
+    url: "/main/chatName",
+    contentType: "application/json",
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    data: {},
+    success: function (response) {
+      console.log("겟 마이 네임 성공")
+      alert(response["message"]);
+      console.log(localStorage.getItem("token"))
+
+    },
+    error: function (error) {
+      console.log("겟 마이 네임 실패")
+      alert(error);
+    },
+  });
+
+}
 
 
 function backToMain(){

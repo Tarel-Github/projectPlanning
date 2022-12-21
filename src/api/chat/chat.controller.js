@@ -1,11 +1,13 @@
-//const ChatService = require("../services/chat.service");
+const ChatService = require("./chat.service");
 
 class ChatController {
-  //chatService = new ChatService();
+  chatService = new ChatService();
 
-  get = async (req, res, next) => {
+  getName = async (req, res, next) => {
     try {
       const { userId } = res.locals.user;
+      const name = await this.chatService.getName(userId);
+
       console.log("======================================");
       console.log("=============이거 뭔가================");
       console.log("======================================");

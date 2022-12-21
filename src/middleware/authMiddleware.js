@@ -6,16 +6,28 @@ require("dotenv").config(); //환경변수 쓸 일이 없다면 이부분 지울
 
 module.exports = async (req, res, next) => {
   try {
-    console.log("00000000");
     const { authorization, refreshtoken } = req.headers;
-    console.log(authorization);
+
+    let a = req.headers.cookie.split(";")[0];
+    let b = req.headers.cookie.split(";")[1];
+
+    a = a.split("=")[1];
+    b = b.split("=")[1];
+
+    let tokenType;
+    let accessToken;
+
+    if (authorization) {
+      tokenType = authorization.split(" ")[0];
+      accessToken = authorization.split(" ")[1];
+    } else {
+      tokenType = "Bearer";
+      accessToken = a;
+    }
     // console.log("어쓰 미들웨어의 공간========="); ///################
     // console.log(authorization); //Bearer 토큰이름 형태로 나옴
     // console.log("어쓰 미들웨어++++++++"); ///################
     // console.log(refreshtoken); //왜 리프레시 토큰은 언디파인드 일까?? 레디스에 저장하지 않아서??
-    const tokenType = authorization.split(" ")[0];
-    console.log("111111");
-    const accessToken = authorization.split(" ")[1];
 
     console.log("11111111");
 
@@ -30,7 +42,7 @@ module.exports = async (req, res, next) => {
     //토큰 타입이 Bearer가 아닐경우 에러
     if (tokenType !== "Bearer")
       return res.status(400).json({ message: "잘못된 요청입니다." });
-
+    console.log("111asdasdasdasds222222");
     /**AccessToken검증 함수 선언 */
     function validateAccessToken(accessToken) {
       try {

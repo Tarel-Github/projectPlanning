@@ -1,18 +1,17 @@
-//처음 들어왔을 때 실행
-$(document).ready(function () {
-  alreadyLogin();
-});
+// //처음 들어왔을 때 실행
+// $(document).ready(function () {
+//   alreadyLogin();
+// });
 
-//이미 로그인이 되어있는지를 확인
-function alreadyLogin(){
-  const token = localStorage.getItem("token")
-  if(token.length > 10) window.location.replace("/main");
-}
+// //이미 로그인이 되어있는지를 확인
+// function alreadyLogin(){
+//   const token = localStorage.getItem("token")
+//   if(token.length > 10) window.location.replace("/main");
+// }
 
 function login() {
   let identifier = $("#identifier").val();
   let password = $("#password").val();
-  console.log(identifier, password);
 
   $.ajax({
     type: "POST",

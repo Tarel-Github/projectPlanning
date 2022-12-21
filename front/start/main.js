@@ -63,6 +63,9 @@ function myProjectList() {
             `;
       $("#projectList").append(plus);
     },
+    error: function (error) {
+      alert("가져오기 에러");
+    },
   });
 }
 
@@ -90,25 +93,17 @@ function newProject() {
 
 //채팅기능======================================================================================
 function chatList() {
-
-
-
   $("#projectList").empty();
   let newRoom = ` 
-    <link href="../chat/chat.html" rel="stylesheet" />
-    <!--채팅 코드 경로-->
 
     <div style="text-align:center">
-    <button type="button" class="btn btn-outline-primary" onclick="enterChat()" >채팅방 입장</button>
+    <button type="button" class="btn btn-outline-primary" onclick="location.href='/chat'" value ="page move">채팅방 입장</button>
+    <button type="button" class="btn btn-outline-primary" onclick="location.href='/test'" value ="page move">테스트 입장</button>
     </div>
     `;
   $("#projectList").append(newRoom);
 }
 //채팅기능======================================================================================
-function enterChat() {
-  window.location.replace("/chat");
-}
-
 
 function otherProjectList() {
   $("#projectList").empty();
@@ -117,7 +112,7 @@ function otherProjectList() {
     타인 프로젝트 열람 기능은 준비중입니다.
     </div>
   `;
-$("#projectList").append(otherProjectList);
+  $("#projectList").append(otherProjectList);
 }
 
 function gameList() {

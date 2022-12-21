@@ -33,10 +33,6 @@ app.use(express.static("front")); //front 폴더에 있는 html 파일을 불러
 
 app.use("/", router); // 라우터 등록, 라우터에 경로별 HTML을 정의해 둔다.
 
-//채팅 관련 코드 시작=================================================
-//채팅 관련 코드 시작=================================================
-//채팅 관련 코드 시작=================================================
-
 const httpServer = http.createServer(app);
 //const server = SocketIO(httpServer);
 
