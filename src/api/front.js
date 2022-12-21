@@ -57,5 +57,10 @@ router.get("/test", (req, res) => {
   res.sendFile(path.join(__dirname, "../../front/chat/test.html"));
 });
 
+router.get("/game/001", (req, res) => {
+  console.log("001번 게임 테트리스를 출력합니다.");
+  res.sendFile(path.join(__dirname, "../../front/game/tetris.html"));
+});
+
 module.exports = router;
 //================================================================

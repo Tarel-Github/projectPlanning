@@ -91,7 +91,6 @@ function newProject() {
   });
 }
 
-//채팅기능======================================================================================
 function chatList() {
   $("#projectList").empty();
   let newRoom = ` 
@@ -102,7 +101,6 @@ function chatList() {
     `;
   $("#projectList").append(newRoom);
 }
-//채팅기능======================================================================================
 
 function otherProjectList() {
   $("#projectList").empty();
