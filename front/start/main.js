@@ -98,7 +98,6 @@ function chatList() {
 
     <div style="text-align:center">
     <button type="button" class="btn btn-outline-primary" onclick="location.href='/chat'" value ="page move">채팅방 입장</button>
-    <button type="button" class="btn btn-outline-primary" onclick="location.href='/test'" value ="page move">테스트 입장</button>
     </div>
     `;
   $("#projectList").append(newRoom);

@@ -1,7 +1,6 @@
 const express = require("express");
 const socketIO = require("socket.io");
 const SocketFunction = require("./socketFunction");
-const auth = require("../../middleware/authMiddleware");
 
 module.exports = (server) => {
   socketFunction = new SocketFunction();
@@ -12,12 +11,6 @@ module.exports = (server) => {
   // countUser = socketFunction.countUser(io);
 
   io.on("connection", (socket) => {
-    console.log("연결");
-    // console.log(socket.request);
-    // console.log(socket.request.res);
-    console.log(auth);
-    //require("express-session")(옵션)(socket.request, socket.request.res, next);
-    console.log();
     socket["nickname"] = "익명";
 
     // socket.onAny((event) => {

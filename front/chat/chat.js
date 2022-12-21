@@ -1,5 +1,6 @@
 const socket = io();
 
+//채팅방 리스트를 보여주는 공간
 const joinRoomDiv = document.getElementById("joinRoomDiv");
 const form = joinRoomDiv.querySelector("form");
 
@@ -34,11 +35,11 @@ function getMyName() {
     data: {},
     success: function (response) {
       //alert(response["data"] + "님 환영합니다.");
-      myname = response["data"]
-      sendNickname(event)
+      myname = response["data"];
+      sendNickname(event);
     },
     error: function (error) {
-      alert(error);
+      console.log(error);
     },
   });
 }
@@ -52,18 +53,19 @@ function addMessage(message) {
   const ul = chatRoomDiv.querySelector("ul");
   const li = document.createElement("li");
   li.innerText = message;
-  console.log(message)
-  console.log(message.split(":")[0])
-  if(message.split(":")[0]==="본인"){
-    const mymsg = `<li style="text-align:right; background-color: white;">${message.split(":")[1]}</li>`
+  console.log(message);
+  console.log(message.split(":")[0]);
+  if (message.split(":")[0] === "본인") {
+    const mymsg = `<li style="text-align:right; background-color: white;">${
+      message.split(":")[1]
+    }</li>`;
     $("#chatSpace").append(mymsg);
     //ul.appendChild(mymsg)
-  }else{
-    const msg = `<li style="text-align:left">${message}</li>`
+  } else {
+    const msg = `<li style="text-align:left">${message}</li>`;
     $("#chatSpace").append(msg);
     //ul.appendChild(li);
   }
-
 }
 
 //새로운 메시지를 보낸다.
