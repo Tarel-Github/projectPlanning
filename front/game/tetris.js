@@ -42,27 +42,33 @@ function startGame(){
         let mainSlot = document.getElementById( mainSlotArray);
 
         mainSlot.style.backgroundColor = "rgb(255,255,255)"
+
+        //자동으로 한 칸씩 내려감
         AutoDown = setInterval(function() {
             y = y+1
             console.log(y)
         }, 500);
 
+        //0.01초마다 갱신되는 블록의 위치
         play = setInterval(function() {
             mainSlotArray = `${y},${x}`
             mainSlot = document.getElementById(mainSlotArray);
             emptySlot = document.getElementsByClassName("empty")
-            //emptySlot.style.backgroundColor = "rgba(255,255,255)"
             for(let i=0; i<emptySlot.length; i++){
                 emptySlot[i].style.backgroundColor = "rgb(60,60,60)"
             }
 
             mainSlot.style.backgroundColor = "rgb(255,255,255)"
 
-            if(y >= 19){
+            //한 칸 아래가 체워진 블록인가?
+            wallArray = `${y+1},${x}`
+            wall = document.getElementById(wallArray);
+            //console.log(wall)
+            if(y >= 19 || wall.className === "used"){
                 stop(mainSlot)
                 return
             }            
-        }, 50);
+        }, 10);
 
 
     }catch(e){
@@ -75,11 +81,8 @@ function startGame(){
 function stop(mainSlot){
     mainSlot.style.backgroundColor = "rgb(150,150,150)"
     mainSlot.className="used"
-    console.log("stopped")
     y = 0
     x = 5
-    //clearInterval(play)
-    //게임이 끝나지 않았으면 다시!
     return
 }
 
@@ -93,7 +96,7 @@ function startControllBlock(){
     console.log(startBlock)
 }
 
-
+//키입력 함수
 document.addEventListener('keydown', (event) => {
     if(!start) return;
     console.log("event.key = " + event.key + "  " + "event.code = " + event.code);
@@ -105,17 +108,17 @@ document.addEventListener('keydown', (event) => {
     }
     if(event.key === "ArrowLeft"){
         if(x >0)x = x-1;
-        
         console.log("왼쪽 키")
     }
     if(event.key === "ArrowDown"){
         if(y <19)y = y+1;
         
-        console.log("왼쪽 키")
+        console.log("아래 키")
     }
-
-
-
+    if(event.key === "ArrowUp"){
+        
+        console.log("위 키")
+    }
 });
 
 //게임을 처음 시작했을 때, 블록 리스트를 생성
