@@ -25,16 +25,6 @@ const max = 7;
 //게임시작 여부
 let start = false
 
-// //배열 조정 함수
-// function updateArray(myArray, oldValue, newValue) {
-//     if (!myArray instanceof Array) return;
-
-//     const index = myArray.indexOf(oldValue);
-//     if (index !== -1) {
-//         myArray[index] = newValue;
-//     }
-// }
-
 let y = 0
 let x = 5
 
@@ -50,24 +40,14 @@ function startGame(){
         let mainSlotArray = `${y},${x}`
 
         let mainSlot = document.getElementById( mainSlotArray);
-        console.log(mainSlot)
-        console.log(mainSlot.id)
-        console.log(mainSlot.id.split(",")[0])
 
-        console.log(mainSlot.style.backgroundColor)
-        console.log("----------------------------")
         mainSlot.style.backgroundColor = "rgb(255,255,255)"
-
-
-
-        play = setInterval(function() {
-            // if(blockList.length < 5){
-            //     blockList.push(Math.floor(Math.random()*(max-min) + min)) 
-            //     //getBlock(Math.floor(Math.random()*(max-min) + min));
-            // }
-            // console.log(blockList)
+        AutoDown = setInterval(function() {
             y = y+1
             console.log(y)
+        }, 500);
+
+        play = setInterval(function() {
             mainSlotArray = `${y},${x}`
             mainSlot = document.getElementById(mainSlotArray);
             emptySlot = document.getElementsByClassName("empty")
@@ -79,12 +59,10 @@ function startGame(){
             mainSlot.style.backgroundColor = "rgb(255,255,255)"
 
             if(y >= 19){
-                stop()
+                stop(mainSlot)
                 return
-            }
-            
-        }, 500);
-
+            }            
+        }, 50);
 
 
     }catch(e){
@@ -93,10 +71,16 @@ function startGame(){
      
 }
 
-//멈춰!
-function stop(){
+//블록이 닿은 경우
+function stop(mainSlot){
+    mainSlot.style.backgroundColor = "rgb(150,150,150)"
+    mainSlot.className="used"
     console.log("stopped")
-    clearInterval(play)
+    y = 0
+    x = 5
+    //clearInterval(play)
+    //게임이 끝나지 않았으면 다시!
+    return
 }
 
 //시작부분은 0,5
@@ -109,39 +93,30 @@ function startControllBlock(){
     console.log(startBlock)
 }
 
-//키입력, 스페이스바, 아래로 내리는 명령
-window.onkeydown = (Space) => {
-    if(!start) return;
 
-    console.log(Space);
-}
-//키입력, 왼쪽
-window.onkeydown = (ArrowLeft) => {
+document.addEventListener('keydown', (event) => {
     if(!start) return;
-    x = x-1;
-    console.log("엑스 좌표는 "+x);
-    console.log(ArrowLeft);
-}
-//키입력, 오른쪽
-window.onkeydown = (ArrowRight) => {
-    if(!start) return;
-    x = x+1;
-    console.log(x)
-    console.log(ArrowRight);
-}
-window.onkeydown = (ArrowDown) => {
-    if(!start) return;
+    console.log("event.key = " + event.key + "  " + "event.code = " + event.code);
 
-    console.log(ArrowDown);
-}
-//방향키 상단은 회전 명령
-window.onkeydown = (ArrowUp) => {
-    if(!start) return;
-
-    console.log(ArrowUp);
-}
+    if(event.key === "ArrowRight"){
+        if(x <9)x = x+1;
+        
+        console.log("오른쪽 키")
+    }
+    if(event.key === "ArrowLeft"){
+        if(x >0)x = x-1;
+        
+        console.log("왼쪽 키")
+    }
+    if(event.key === "ArrowDown"){
+        if(y <19)y = y+1;
+        
+        console.log("왼쪽 키")
+    }
 
 
+
+});
 
 //게임을 처음 시작했을 때, 블록 리스트를 생성
 function getBlockStart(){
