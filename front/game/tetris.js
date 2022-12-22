@@ -13,7 +13,7 @@ function grid() {
         grid = `<tr id="grid${i}">`
         $(`#tetrisGrid`).append(grid)
         for (let j = 0; j <10; j++){
-            let a =`<td id="${i},${j}"></td>`
+            let a =`<td id="${i},${j}" class = "empty"></td>`
             $(`#grid${i}`).append(a);
         }
     }
@@ -47,16 +47,16 @@ function startGame(){
         startControllBlock()//블록리스트에서 최상단을 가져옴
         y = 0
         x = 5
-        let mainslotArray = `${y},${x}`
+        let mainSlotArray = `${y},${x}`
 
-        let mainslot = document.getElementById( mainslotArray);
-        console.log(mainslot)
-        console.log(mainslot.id)
-        console.log(mainslot.id.split(",")[0])
+        let mainSlot = document.getElementById( mainSlotArray);
+        console.log(mainSlot)
+        console.log(mainSlot.id)
+        console.log(mainSlot.id.split(",")[0])
 
-        console.log(mainslot.style.backgroundColor)
+        console.log(mainSlot.style.backgroundColor)
         console.log("----------------------------")
-        mainslot.style.backgroundColor = "rgb(255,255,255)"
+        mainSlot.style.backgroundColor = "rgb(255,255,255)"
 
 
 
@@ -66,20 +66,24 @@ function startGame(){
             //     //getBlock(Math.floor(Math.random()*(max-min) + min));
             // }
             // console.log(blockList)
-            console.log("타이머 함수")
             y = y+1
             console.log(y)
-            mainslotArray = `${y},${x}`
-            mainslot = document.getElementById( mainslotArray);
-            mainslot.style.backgroundColor = "rgb(255,255,255)"
+            mainSlotArray = `${y},${x}`
+            mainSlot = document.getElementById(mainSlotArray);
+            emptySlot = document.getElementsByClassName("empty")
+            //emptySlot.style.backgroundColor = "rgba(255,255,255)"
+            for(let i=0; i<emptySlot.length; i++){
+                emptySlot[i].style.backgroundColor = "rgb(60,60,60)"
+            }
+
+            mainSlot.style.backgroundColor = "rgb(255,255,255)"
 
             if(y >= 19){
-                console.log("asdasdasdasdas")
                 stop()
                 return
             }
             
-        }, 100);
+        }, 500);
 
 
 
@@ -95,8 +99,6 @@ function stop(){
     clearInterval(play)
 }
 
-
-
 //시작부분은 0,5
 function startControllBlock(){
     let startBlock = blockList[0]
@@ -107,23 +109,24 @@ function startControllBlock(){
     console.log(startBlock)
 }
 
-
-
 //키입력, 스페이스바, 아래로 내리는 명령
-window.onkeydown = (space) => {
+window.onkeydown = (Space) => {
     if(!start) return;
 
-    console.log(space);
+    console.log(Space);
 }
-//키입력, 방향키 명령
+//키입력, 왼쪽
 window.onkeydown = (ArrowLeft) => {
     if(!start) return;
-
+    x = x-1;
+    console.log("엑스 좌표는 "+x);
     console.log(ArrowLeft);
 }
+//키입력, 오른쪽
 window.onkeydown = (ArrowRight) => {
     if(!start) return;
-
+    x = x+1;
+    console.log(x)
     console.log(ArrowRight);
 }
 window.onkeydown = (ArrowDown) => {
