@@ -71,6 +71,43 @@ function startGame(){
         }, 10);
 
 
+
+        //키입력 함수
+        document.addEventListener('keydown', (event) => {
+            if(!start) return;
+            // console.log("event.key = " + event.key + "  " + "event.code = " + event.code);
+
+            if(event.key === "ArrowRight"){
+                const a = document.getElementById(`${y},${x+1}`)
+                console.log(x)
+                console.log(a)
+                if(x <9 && a.className === "empty")x = x+1;
+                
+                console.log("오른쪽 키")
+            }
+            if(event.key === "ArrowLeft"){
+                const a = document.getElementById(`${y},${x-1}`)
+                if(x >0 &&a.className === "empty")x = x-1;
+                console.log("왼쪽 키")
+            }
+            if(event.key === "ArrowDown"){
+                if(y <19)y = y+1;
+                
+                console.log("아래 키")
+            }
+            if(event.key === "ArrowUp"){
+                
+                console.log("위 키")
+            }
+        });
+
+
+
+
+
+
+
+
     }catch(e){
         
     }
@@ -96,30 +133,7 @@ function startControllBlock(){
     console.log(startBlock)
 }
 
-//키입력 함수
-document.addEventListener('keydown', (event) => {
-    if(!start) return;
-    console.log("event.key = " + event.key + "  " + "event.code = " + event.code);
 
-    if(event.key === "ArrowRight"){
-        if(x <9)x = x+1;
-        
-        console.log("오른쪽 키")
-    }
-    if(event.key === "ArrowLeft"){
-        if(x >0)x = x-1;
-        console.log("왼쪽 키")
-    }
-    if(event.key === "ArrowDown"){
-        if(y <19)y = y+1;
-        
-        console.log("아래 키")
-    }
-    if(event.key === "ArrowUp"){
-        
-        console.log("위 키")
-    }
-});
 
 //게임을 처음 시작했을 때, 블록 리스트를 생성
 function getBlockStart(){
