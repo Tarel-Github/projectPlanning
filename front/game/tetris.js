@@ -79,10 +79,7 @@ function startGame(){
 
             if(event.key === "ArrowRight"){
                 const a = document.getElementById(`${y},${x+1}`)
-                console.log(x)
-                console.log(a)
                 if(x <9 && a.className === "empty")x = x+1;
-                
                 console.log("오른쪽 키")
             }
             if(event.key === "ArrowLeft"){
