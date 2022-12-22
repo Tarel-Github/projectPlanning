@@ -1,3 +1,6 @@
+// const Block = require("./block")
+// block = new Block
+
 //우선, 그리드부터 깔자
 $(document).ready(function () {
     grid();
@@ -10,7 +13,7 @@ function grid() {
         grid = `<tr id="grid${i}">`
         $(`#tetrisGrid`).append(grid)
         for (let j = 0; j <10; j++){
-            let a =`<td id="[${i},${j}]"></td>`
+            let a =`<td id="${i},${j}"></td>`
             $(`#grid${i}`).append(a);
         }
     }
@@ -22,35 +25,86 @@ const max = 7;
 //게임시작 여부
 let start = false
 
+// //배열 조정 함수
+// function updateArray(myArray, oldValue, newValue) {
+//     if (!myArray instanceof Array) return;
+
+//     const index = myArray.indexOf(oldValue);
+//     if (index !== -1) {
+//         myArray[index] = newValue;
+//     }
+// }
+
+let y = 0
+let x = 5
+
 //게임 시작
 function startGame(){
     try{
         if (start) return
         start = true;
-        getBlockStart()
-        startControllBlock()
+        getBlockStart()//우선 블록리스트를 만듦
+        startControllBlock()//블록리스트에서 최상단을 가져옴
+        y = 0
+        x = 5
+        let mainslotArray = `${y},${x}`
+
+        let mainslot = document.getElementById( mainslotArray);
+        console.log(mainslot)
+        console.log(mainslot.id)
+        console.log(mainslot.id.split(",")[0])
+
+        console.log(mainslot.style.backgroundColor)
+        console.log("----------------------------")
+        mainslot.style.backgroundColor = "rgb(255,255,255)"
+
+
 
         play = setInterval(function() {
-            if(blockList.length < 5){
-                blockList.push(Math.floor(Math.random()*(max-min) + min)) 
-                //getBlock(Math.floor(Math.random()*(max-min) + min));
-            }
-            console.log(blockList)
+            // if(blockList.length < 5){
+            //     blockList.push(Math.floor(Math.random()*(max-min) + min)) 
+            //     //getBlock(Math.floor(Math.random()*(max-min) + min));
+            // }
+            // console.log(blockList)
             console.log("타이머 함수")
-        }, 1000);
+            y = y+1
+            console.log(y)
+            mainslotArray = `${y},${x}`
+            mainslot = document.getElementById( mainslotArray);
+            mainslot.style.backgroundColor = "rgb(255,255,255)"
+
+            if(y >= 19){
+                console.log("asdasdasdasdas")
+                stop()
+                return
+            }
+            
+        }, 100);
+
+
+
     }catch(e){
         
     }
      
 }
 
+//멈춰!
+function stop(){
+    console.log("stopped")
+    clearInterval(play)
+}
+
+
+
+//시작부분은 0,5
 function startControllBlock(){
-    let block = blockList[0]
+    let startBlock = blockList[0]
     blockList.shift()
     blockList.push(Math.floor(Math.random()*(max-min) + min)) 
-    console.log(blockList)
-    console.log(block)
 
+    console.log(blockList)
+    console.log(startBlock)
 }
 
 
