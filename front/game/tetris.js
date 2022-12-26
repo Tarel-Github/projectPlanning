@@ -63,7 +63,6 @@ function startGame(){
             //한 칸 아래가 체워진 블록인가?
             wallArray = `${y+1},${x}`
             wall = document.getElementById(wallArray);
-            //console.log(wall)
             if(y >= 19 || wall.className === "used"){
                 stop(mainSlot)
                 return
@@ -75,7 +74,6 @@ function startGame(){
         //키입력 함수
         document.addEventListener('keydown', (event) => {
             if(!start) return;
-            // console.log("event.key = " + event.key + "  " + "event.code = " + event.code);
 
             if(event.key === "ArrowRight"){
                 const a = document.getElementById(`${y},${x+1}`)
@@ -97,11 +95,6 @@ function startGame(){
                 console.log("위 키")
             }
         });
-
-
-
-
-
 
 
 
