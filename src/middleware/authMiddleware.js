@@ -29,8 +29,6 @@ module.exports = async (req, res, next) => {
     // console.log("어쓰 미들웨어++++++++"); ///################
     // console.log(refreshtoken); //왜 리프레시 토큰은 언디파인드 일까?? 레디스에 저장하지 않아서??
 
-    console.log("11111111");
-
     // console.log("중간보고"); ///################
 
     const refreshToken = refreshtoken;
@@ -38,11 +36,9 @@ module.exports = async (req, res, next) => {
     // console.log("토큰 타입======================"); ///################
     // console.log(tokenType); ///################
     // console.log("토큰 타입끝++++++++++++++"); ///################
-    console.log("111222222");
     //토큰 타입이 Bearer가 아닐경우 에러
     if (tokenType !== "Bearer")
       return res.status(400).json({ message: "잘못된 요청입니다." });
-    console.log("111asdasdasdasds222222");
     /**AccessToken검증 함수 선언 */
     function validateAccessToken(accessToken) {
       try {
@@ -52,7 +48,6 @@ module.exports = async (req, res, next) => {
         return false;
       }
     }
-    console.log("11333333");
     /**RefreshToken검증 함수 선언 */
     const validateRefreshToken = async (refreshToken) => {
       try {
@@ -78,7 +73,6 @@ module.exports = async (req, res, next) => {
     if (refreshToken && !isRefreshTokenValidate) {
       return res.status(419).json({ message: "다시 로그인 해주세요" });
     }
-    console.log("4444");
     /**refreshToken유효 accesstoken 재발급*/
     if (refreshToken && accessToken && isRefreshTokenValidate) {
       const decoded = jwt.decode(accessToken);
