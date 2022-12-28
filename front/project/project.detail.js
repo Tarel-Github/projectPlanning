@@ -30,11 +30,11 @@ function getTodo() {
         let updatedAt = rows[i]["updatedAt"];
         let uAt = updatedAt.split("T")[0];
         let uAt_2 = uAt.split("-")[1] + "-" + uAt.split("-")[2];
+        let checked = rows[i]["check"] ===true ? "checked": "";
         let temp_html = `
                     <tr>
-                        <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-
-                        <td style="width: 8%; min-width: 50px;">${check}</td>               
+                        <td style="width: 8%; min-width: 50px;"><input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="..." ${checked}>
+                        ${check}</td>               
                         <td style="width: 8%; min-width: 50px;">${num}</td>
                         <td style="width: 40%; min-width: 200px;">${title}</td>
                         <td style="width: 12.5%; min-width: 75px;">${cAt_2}</td>
