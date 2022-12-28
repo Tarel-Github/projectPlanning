@@ -23,7 +23,6 @@ function checkTodo(param) {
     }),
     success: function (response) {
       alert(response["message"]);
-      window.location.reload();
     },
     error: function (error) {
       customAlert(error.responseJSON.errorMessage);
