@@ -5,6 +5,32 @@ $(document).ready(function () {
   getFile();
 });
 
+function checkTodo(param) {
+  let content = $("#checkbox" + param).val();
+  let check
+  if (content =="no"){//no라는건 체크가 안되어 있었다는 뜻
+    check = true;
+  }else{
+    check = false;
+  }
+  $.ajax({
+    type: "PUT",
+    url: "/todo/put/check/" + param,
+    contentType: "application/json",
+    headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
+    data: JSON.stringify({
+      check: check,
+    }),
+    success: function (response) {
+      alert(response["message"]);
+      window.location.reload();
+    },
+    error: function (error) {
+      customAlert(error.responseJSON.errorMessage);
+    },
+  });
+}
+
 function getTodo() {
   let address = unescape(location.href);
   let param = address.split("/")[4];
@@ -30,11 +56,10 @@ function getTodo() {
         let updatedAt = rows[i]["updatedAt"];
         let uAt = updatedAt.split("T")[0];
         let uAt_2 = uAt.split("-")[1] + "-" + uAt.split("-")[2];
-        let checked = rows[i]["check"] ===true ? "checked": "";
+        let checked = rows[i]["check"] === true ? "checked" : "no";
         let temp_html = `
                     <tr>
-                        <td style="width: 8%; min-width: 50px;"><input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="..." ${checked}>
-                        ${check}</td>               
+                        <td style="width: 8%; min-width: 50px;"><input class="form-check-input" type="checkbox" id="checkbox${todoId}" onclick="checkTodo(${todoId})"value="${checked}" aria-label="..." ${checked}></td>               
                         <td style="width: 8%; min-width: 50px;">${num}</td>
                         <td style="width: 40%; min-width: 200px;">${title}</td>
                         <td style="width: 12.5%; min-width: 75px;">${cAt_2}</td>
@@ -212,8 +237,6 @@ function postTodo() {
   });
 }
 
-function check() {}
-
 function putTodo(param) {
   let content = $("#putTodoContent" + param).val();
   $.ajax({
@@ -274,7 +297,7 @@ function deletePlan(param) {
   });
 }
 
-function moveToFile(){
+function moveToFile() {
   let address = unescape(location.href);
   let param = address.split("/")[4];
   window.location.replace("/project/detail/postFile/" + param);
@@ -301,13 +324,13 @@ function getFile() {
         let textUpdatedAt = rows[i][0].updatedAt;
 
         let ImageFile = rows[i][1].fileImage;
-        console.log(ImageFile)
+        console.log(ImageFile);
 
         let cAt = textCreatedAt.split("T")[0];
         let cAt_2 = cAt.split("-")[1] + "-" + cAt.split("-")[2];
         let uAt = textUpdatedAt.split("T")[0];
         let uAt_2 = uAt.split("-")[1] + "-" + uAt.split("-")[2];
-        
+
         let temp_html = `  
                 <div class="card" style="width: 22.5%; float: left; margin:1%; height: 400px">
                     <img src = "/imgs/${ImageFile}", height="100%", class="card-img-top", alt="이건 출력되면 안됌">
@@ -331,19 +354,11 @@ function getFile() {
   });
 }
 
-function detailFile(){
+function detailFile() {}
 
-}
+function putFile() {}
 
-function putFile(){
-
-}
-
-function deleteFile(){
-  
-}
-
-
+function deleteFile() {}
 
 function customAlert(text, confirmCallback) {
   $("#alertText").text(text);
